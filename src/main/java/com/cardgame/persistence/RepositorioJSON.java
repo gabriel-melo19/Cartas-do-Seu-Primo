@@ -1,6 +1,6 @@
 package com.cardgame.persistence;
 
-public interface RepositorioJogo {
+public class RepositorioJSON {
 
     public static void main(String[] args) {
 
