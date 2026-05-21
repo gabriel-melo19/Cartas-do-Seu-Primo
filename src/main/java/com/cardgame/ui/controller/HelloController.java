@@ -1,4 +1,4 @@
-package com.cardgame.cardgame;
+package com.cardgame.ui.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
