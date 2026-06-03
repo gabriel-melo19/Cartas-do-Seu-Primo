@@ -7,4 +7,10 @@ module com.cardgame.cardgame {
     opens com.cardgame.cardgame to javafx.fxml;
     exports com.cardgame.cardgame;
     exports com.cardgame.ui.controller;
+
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.annotation;
+
+    opens com.cardgame.model to com.fasterxml.jackson.databind;
+    opens com.cardgame.persistence to com.fasterxml.jackson.databind;
 }
