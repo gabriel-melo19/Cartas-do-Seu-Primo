@@ -1,4 +1,4 @@
-package com.cardgame.cardgame;
+package com.cardgame;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
