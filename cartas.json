@@ -1,0 +1,10 @@
+[ {
+  "id" : "1",
+  "nome" : "Dragão Branco",
+  "imagem" : "dragon.png",
+  "descricao" : "Um dragão lendário",
+  "elemento" : null,
+  "poderDeLuta" : 3000,
+  "vida" : 2500,
+  "efeito" : "Ataque duplo"
+} ]
