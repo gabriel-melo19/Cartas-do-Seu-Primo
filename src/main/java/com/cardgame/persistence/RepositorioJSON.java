@@ -53,7 +53,7 @@ public class RepositorioJSON {
                 null,
                 3000,
                 2500,
-                "Ataque duplo"
+                null    // <- deixei null para não commitar o erro. Esse é o efeito, mas os efeitos precisam ser objetos (não uma lista de objetos)
         );
 
         adicionarCarta(carta);
