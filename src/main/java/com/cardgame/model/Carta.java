@@ -154,14 +154,11 @@ public class Carta {
         }
 
         if (this.temEscudo) {
-            // Escudo protege totalmente e desaparece
             this.removerEscudo();
-            return true; // Dano bloqueado
+            return true;
         }
-
-        // Sem escudo, dano é aplicado à vida
         this.vida -= dano;
-        return false; // Dano aplicado
+        return false;
     }
 
     /**
