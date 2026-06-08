@@ -8,7 +8,6 @@ public enum Elemento {
     ELETRICO,
     GELO,
     METAL,
-    AR,
     LUZ,
     TREVAS
 }
