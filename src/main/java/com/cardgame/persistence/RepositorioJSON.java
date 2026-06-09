@@ -1,6 +1,8 @@
 package com.cardgame.persistence;
 
 import com.cardgame.model.Carta;
+import com.cardgame.model.TipoEfeito;
+import com.cardgame.effects.EfeitoFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -21,7 +23,22 @@ public class RepositorioJSON {
                 return new ArrayList<>();
             }
 
-            return mapper.readValue(file, new TypeReference<List<Carta>>() {});
+            List<Carta> cartas = mapper.readValue(
+                    file,
+                    new TypeReference<List<Carta>>() {}
+            );
+
+            //CRIA OS EFEITOS DEPOIS DE LER
+            for (Carta c : cartas) {
+                if (c.getTipoEfeito() != null) {
+                    c.setEfeito(
+                            EfeitoFactory.criarEfeito(c.getTipoEfeito(), null)
+                    );
+                }
+            }
+
+            return cartas;
+
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -30,7 +47,8 @@ public class RepositorioJSON {
 
     public static void salvarCartas(List<Carta> cartas) {
         try {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(FILE_PATH), cartas);
+            mapper.writerWithDefaultPrettyPrinter()
+                    .writeValue(new File(FILE_PATH), cartas);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,7 +60,7 @@ public class RepositorioJSON {
         salvarCartas(cartas);
     }
 
-    // Só pra teste
+    //TESTES
     public static void main(String[] args) {
 
         Carta carta = new Carta(
@@ -53,13 +71,19 @@ public class RepositorioJSON {
                 null,
                 3000,
                 2500,
-                null    // <- deixei null para não commitar o erro. Esse é o efeito, mas os efeitos precisam ser objetos (não uma lista de objetos)
+                TipoEfeito.ESCUDO_INICIAL
         );
 
         adicionarCarta(carta);
 
+        System.out.println("Cartas carregadas:");
+
         for (Carta c : listarCartas()) {
             System.out.println(c.getNome());
+
+            if (c.temEfeito()) {
+                System.out.println("Efeito: " + c.getEfeito().getNomeEfeito());
+            }
         }
     }
 }

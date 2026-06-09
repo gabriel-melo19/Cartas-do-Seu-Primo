@@ -6,5 +6,6 @@
   "elemento" : null,
   "poderDeLuta" : 3000,
   "vida" : 2500,
-  "efeito" : "Ataque duplo"
+  "tipoEfeito" : "ESCUDO_INICIAL",
+  "temEscudo" : false
 } ]
