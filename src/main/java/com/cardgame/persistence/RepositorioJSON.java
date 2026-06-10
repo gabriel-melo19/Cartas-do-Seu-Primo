@@ -1,39 +1,35 @@
 package com.cardgame.persistence;
 
-import com.cardgame.model.Carta;
-import com.cardgame.model.TipoEfeito;
 import com.cardgame.effects.EfeitoFactory;
+import com.cardgame.model.Carta;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RepositorioJSON {
 
-    private static final String FILE_PATH = "cartas.json";
+    private static final String RESOURCE_PATH = "/com/cardgame/json/cartas.json";
+    private static final String SAVE_PATH = "saves/cartas.json";
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static List<Carta> listarCartas() {
-        try {
-            File file = new File(FILE_PATH);
+        try (InputStream is = RepositorioJSON.class.getResourceAsStream(RESOURCE_PATH)) {
 
-            if (!file.exists()) {
+            if (is == null) {
+                System.out.println("[ERRO] cartas.json não encontrado em: " + RESOURCE_PATH);
                 return new ArrayList<>();
             }
 
-            List<Carta> cartas = mapper.readValue(
-                    file,
-                    new TypeReference<List<Carta>>() {}
-            );
+            List<Carta> cartas = mapper.readValue(is, new TypeReference<List<Carta>>() {});
 
-            //CRIA OS EFEITOS DEPOIS DE LER
             for (Carta c : cartas) {
                 if (c.getTipoEfeito() != null) {
-                    c.setEfeito(
-                            EfeitoFactory.criarEfeito(c.getTipoEfeito(), null)
-                    );
+                    c.setEfeito(EfeitoFactory.criarEfeito(c.getTipoEfeito(), null));
                 }
             }
 
@@ -47,43 +43,17 @@ public class RepositorioJSON {
 
     public static void salvarCartas(List<Carta> cartas) {
         try {
-            mapper.writerWithDefaultPrettyPrinter()
-                    .writeValue(new File(FILE_PATH), cartas);
+            Path path = Path.of(SAVE_PATH);
+            Files.createDirectories(path.getParent());
+            mapper.writerWithDefaultPrettyPrinter().writeValue(path.toFile(), cartas);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static void adicionarCarta(Carta carta) {
-        List<Carta> cartas = listarCartas();
+        List<Carta> cartas = new ArrayList<>(listarCartas());
         cartas.add(carta);
         salvarCartas(cartas);
-    }
-
-    //TESTES
-    public static void main(String[] args) {
-
-        Carta carta = new Carta(
-                "1",
-                "Dragão Branco",
-                "dragon.png",
-                "Um dragão lendário",
-                null,
-                3000,
-                2500,
-                TipoEfeito.ESCUDO_INICIAL
-        );
-
-        adicionarCarta(carta);
-
-        System.out.println("Cartas carregadas:");
-
-        for (Carta c : listarCartas()) {
-            System.out.println(c.getNome());
-
-            if (c.temEfeito()) {
-                System.out.println("Efeito: " + c.getEfeito().getNomeEfeito());
-            }
-        }
     }
 }

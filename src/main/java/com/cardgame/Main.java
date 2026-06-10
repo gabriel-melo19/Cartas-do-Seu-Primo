@@ -1,19 +1,25 @@
 package com.cardgame;
 
+import com.cardgame.ui.ScreenManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class Main extends Application {
+
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/cardgame/cardgame/fxml/main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Card Game");
-        stage.setScene(scene);
+    public void start(Stage stage) {
+        ScreenManager screenManager = new ScreenManager();
+
+        Scene cenaPrincipal = new Scene(screenManager, 1280, 720);
+
+        stage.setTitle("DeckHero");
+        stage.setScene(cenaPrincipal);
+        stage.setMaximized(true);
         stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

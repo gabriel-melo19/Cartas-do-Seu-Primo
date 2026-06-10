@@ -1,0 +1,172 @@
+[
+  {
+    "id": "1",
+    "nome": "Árvore de Ferro",
+    "imagem": "com/cardgame/img/cartas/arvore_de_ferro.png",
+    "descricao": "Uma guardiã vegetal de tronco endurecido como metal.",
+    "elemento": "METAL",
+    "poderDeLuta": 78,
+    "vida": 92,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "2",
+    "nome": "Balatro",
+    "imagem": "com/cardgame/img/cartas/balatro.png",
+    "descricao": "Uma figura enigmática que altera o rumo da batalha.",
+    "elemento": "TREVAS",
+    "poderDeLuta": 83,
+    "vida": 67,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "3",
+    "nome": "Chama da Raposa",
+    "imagem": "com/cardgame/img/cartas/chama_da_raposa.png",
+    "descricao": "Uma criatura veloz envolta em fogo traiçoeiro.",
+    "elemento": "FOGO",
+    "poderDeLuta": 89,
+    "vida": 60,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "4",
+    "nome": "Creep da Névoa",
+    "imagem": "com/cardgame/img/cartas/creep_da_nevoa.png",
+    "descricao": "Surge em silêncio e desestabiliza o inimigo.",
+    "elemento": "AGUA",
+    "poderDeLuta": 68,
+    "vida": 80,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "5",
+    "nome": "Filósofo",
+    "imagem": "com/cardgame/img/cartas/filosofo.png",
+    "descricao": "Prefere inverter a vantagem do oponente com inteligência.",
+    "elemento": "LUZ",
+    "poderDeLuta": 57,
+    "vida": 86,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "6",
+    "nome": "Gaiola de Faraday",
+    "imagem": "com/cardgame/img/cartas/gaiola_de_faraday.png",
+    "descricao": "Uma defesa elétrica que neutraliza ameaças próximas.",
+    "elemento": "ELETRICO",
+    "poderDeLuta": 64,
+    "vida": 95,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "7",
+    "nome": "Gotas de Metal",
+    "imagem": "com/cardgame/img/cartas/gotas_de_metal.png",
+    "descricao": "Fragmentos metálicos líquidos que atingem com precisão.",
+    "elemento": "METAL",
+    "poderDeLuta": 81,
+    "vida": 63,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "8",
+    "nome": "Inimigo Espelhado",
+    "imagem": "com/cardgame/img/cartas/inimigo_espelhado.png",
+    "descricao": "Reflete a condição da batalha contra quem o enfrenta.",
+    "elemento": "LUZ",
+    "poderDeLuta": 76,
+    "vida": 72,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "9",
+    "nome": "Invasor de Redes",
+    "imagem": "com/cardgame/img/cartas/invasor_de_redes.png",
+    "descricao": "Ataca sistemas e desmonta a vantagem adversária.",
+    "elemento": "ELETRICO",
+    "poderDeLuta": 85,
+    "vida": 58,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "10",
+    "nome": "Luz Azul",
+    "imagem": "com/cardgame/img/cartas/luz_azul.png",
+    "descricao": "Uma energia calma que protege antes de reagir.",
+    "elemento": "LUZ",
+    "poderDeLuta": 72,
+    "vida": 78,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "11",
+    "nome": "Sapo Elegante",
+    "imagem": "com/cardgame/img/cartas/sapo_elegante.png",
+    "descricao": "Discreto, refinado e surpreendentemente resistente.",
+    "elemento": "AGUA",
+    "poderDeLuta": 61,
+    "vida": 87,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "12",
+    "nome": "Sapo Trevoso",
+    "imagem": "com/cardgame/img/cartas/sapo_trevoso.png",
+    "descricao": "Atua nas sombras e vira o jogo em silêncio.",
+    "elemento": "TREVAS",
+    "poderDeLuta": 82,
+    "vida": 66,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "13",
+    "nome": "Toco",
+    "imagem": "com/cardgame/img/cartas/toco.png",
+    "descricao": "Parece simples, mas absorve muito dano.",
+    "elemento": "TERRA",
+    "poderDeLuta": 52,
+    "vida": 98,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "14",
+    "nome": "Tronco que Dança",
+    "imagem": "com/cardgame/img/cartas/tronco_que_danca.png",
+    "descricao": "Se move de forma estranha e muda o ritmo do combate.",
+    "elemento": "PLANTA",
+    "poderDeLuta": 79,
+    "vida": 71,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "15",
+    "nome": "Uma Lei",
+    "imagem": "com/cardgame/img/cartas/uma_lei.png",
+    "descricao": "Impõe ordem e reorganiza o campo de batalha.",
+    "elemento": "LUZ",
+    "poderDeLuta": 67,
+    "vida": 85,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "16",
+    "nome": "Vinhas",
+    "imagem": "com/cardgame/img/cartas/vinhas.png",
+    "descricao": "Crescem rápido e seguram qualquer avanço inimigo.",
+    "elemento": "PLANTA",
+    "poderDeLuta": 73,
+    "vida": 83,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  },
+  {
+    "id": "17",
+    "nome": "Violino de Claudios",
+    "imagem": "com/cardgame/img/cartas/violino_de_claudios.png",
+    "descricao": "Uma melodia rara que altera o equilíbrio do duelo.",
+    "elemento": "GELO",
+    "poderDeLuta": 70,
+    "vida": 75,
+    "tipoEfeito": "ESCUDO_INICIAL"
+  }
+]

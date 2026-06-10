@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.cardgame.ui.controller.SelecaoDeckController"
+           stylesheets="@../css/estilo_deck.css"
+           pickOnBounds="false">
+
+    <VBox fx:id="containerPrincipal"
+          alignment="CENTER"
+          spacing="35.0"
+          maxWidth="1100.0">
+
+        <padding>
+            <Insets top="40.0" right="40.0" bottom="40.0" left="40.0"/>
+        </padding>
+
+        <!-- TÍTULO DINÂMICO -->
+        <Label fx:id="tituloTela"
+               text="Escolha seu deck"
+               styleClass="titulo-tela" />
+
+        <!-- MODO 1: LISTA DE DECKS -->
+        <FlowPane fx:id="painelListaDecks"
+                  alignment="CENTER"
+                  hgap="30.0"
+                  vgap="25.0"
+                  prefWrapLength="900.0"
+                  styleClass="painel-lista-decks" />
+
+        <!-- MODO 2: DECK SELECIONADO -->
+        <VBox fx:id="painelDeckSelecionado"
+              alignment="CENTER"
+              spacing="30.0"
+              visible="false"
+              managed="false">
+
+            <FlowPane fx:id="painelCartasDeck"
+                      alignment="CENTER"
+                      hgap="20.0"
+                      vgap="20.0"
+                      prefWrapLength="1000.0"
+                      styleClass="painel-cartas-deck" />
+
+            <HBox alignment="CENTER" spacing="28.0">
+                <Button fx:id="botaoConfirmarDeck"
+                        text="CONFIRMAR DECK"
+                        onAction="#confirmarDeckSelecionado"
+                        styleClass="botao-acao-deck" />
+
+                <Button fx:id="botaoSelecionarOutroDeck"
+                        text="SELECIONAR OUTRO DECK"
+                        onAction="#selecionarOutroDeck"
+                        styleClass="botao-acao-deck" />
+            </HBox>
+
+        </VBox>
+
+        <!-- VOLTAR -->
+        <Button fx:id="botaoVoltar"
+                text="VOLTAR"
+                onAction="#voltarParaMenu"
+                styleClass="botao-voltar" />
+
+    </VBox>
+
+</StackPane>
