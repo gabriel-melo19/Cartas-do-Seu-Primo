@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RepositorioJSON {
 
-    private static final String RESOURCE_PATH = "/com/cardgame/json/cartas.json";
+    private static final String RESOURCE_PATH = "/com/cardgame/dados/cartas.json";
     private static final String SAVE_PATH = "saves/cartas.json";
     private static final ObjectMapper mapper = new ObjectMapper();
 
