@@ -18,7 +18,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -135,6 +134,9 @@ public class SelecaoDeckController implements ControladorDeFluxo {
         painelDeckSelecionado.setVisible(true);
         painelDeckSelecionado.setManaged(true);
 
+        botaoVoltar.setVisible(false);
+        botaoVoltar.setManaged(false);
+
         painelCartasDeck.getChildren().clear();
 
         for (Carta carta : deck.getCartas()) {
@@ -213,6 +215,9 @@ public class SelecaoDeckController implements ControladorDeFluxo {
 
         painelListaDecks.setVisible(true);
         painelListaDecks.setManaged(true);
+
+        botaoVoltar.setVisible(true);
+        botaoVoltar.setManaged(true);
     }
 
     @FXML
