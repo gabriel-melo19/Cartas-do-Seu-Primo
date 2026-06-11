@@ -9,6 +9,7 @@ import com.cardgame.ui.ScreenManager;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
@@ -18,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -31,10 +33,18 @@ public class SelecaoDeckController implements ControladorDeFluxo {
     @FXML private Label tituloTela;
     @FXML private FlowPane painelListaDecks;
     @FXML private VBox painelDeckSelecionado;
-    @FXML private FlowPane painelCartasDeck;
+    @FXML private HBox painelCartasDeck;
     @FXML private Button botaoConfirmarDeck;
     @FXML private Button botaoSelecionarOutroDeck;
     @FXML private Button botaoVoltar;
+
+    @FXML private StackPane overlayDetalhesCarta;
+    @FXML private VBox janelaDetalhesCarta;
+    @FXML private Button botaoFecharDetalhes;
+    @FXML private Label nomeDetalhesCarta;
+    @FXML private Label atkDetalhesCarta;
+    @FXML private Label hpDetalhesCarta;
+    @FXML private Label descricaoDetalhesCarta;
 
     private ScreenManager screenManager;
     private Deck deckSelecionadoAtual;
@@ -44,6 +54,17 @@ public class SelecaoDeckController implements ControladorDeFluxo {
         configurarBotao(botaoConfirmarDeck);
         configurarBotao(botaoSelecionarOutroDeck);
         configurarBotao(botaoVoltar);
+        configurarBotao(botaoFecharDetalhes);
+
+        if (overlayDetalhesCarta != null) {
+            overlayDetalhesCarta.setVisible(false);
+            overlayDetalhesCarta.setManaged(false);
+            overlayDetalhesCarta.setOnMouseClicked(event -> fecharDetalhesCarta());
+        }
+
+        if (janelaDetalhesCarta != null) {
+            janelaDetalhesCarta.setOnMouseClicked(event -> event.consume());
+        }
     }
 
     @Override
@@ -146,43 +167,95 @@ public class SelecaoDeckController implements ControladorDeFluxo {
     }
 
     private VBox criarCartaVisual(Carta carta) {
-        VBox cartaBox = new VBox(8);
-        cartaBox.setAlignment(Pos.TOP_CENTER);
+        VBox cartaBox = new VBox();
+        cartaBox.setAlignment(Pos.CENTER);
         cartaBox.getStyleClass().add("carta-deck-selecionado");
-        cartaBox.setPrefWidth(170);
-        cartaBox.setMinWidth(170);
-        cartaBox.setMaxWidth(170);
+        cartaBox.setPrefWidth(212);
+        cartaBox.setMinWidth(212);
+        cartaBox.setMaxWidth(212);
 
-        ImageView imagemCarta = criarImagemCarta(carta, 150, 180);
+        StackPane cartaStack = new StackPane();
+        cartaStack.setAlignment(Pos.CENTER);
+        cartaStack.getStyleClass().add("carta-stack");
+        cartaStack.setPrefWidth(212);
+        cartaStack.setMinWidth(212);
+        cartaStack.setMaxWidth(212);
+        cartaStack.setPrefHeight(312);
+        cartaStack.setMinHeight(312);
+        cartaStack.setMaxHeight(312);
+
+        ImageView imagemCarta = criarImagemCarta(carta, 212, 312);
+        imagemCarta.getStyleClass().add("imagem-carta-principal");
 
         Label nomeCarta = new Label(carta.getNome());
         nomeCarta.setWrapText(true);
-        nomeCarta.setMaxWidth(145);
+        nomeCarta.setMaxWidth(180);
+        nomeCarta.setAlignment(Pos.CENTER);
         nomeCarta.getStyleClass().add("nome-carta-selecionada");
+        StackPane.setAlignment(nomeCarta, Pos.BOTTOM_CENTER);
+        StackPane.setMargin(nomeCarta, new Insets(0, 16, 14, 16));
 
-        Label atributosCarta = new Label("ATK: " + carta.getPoderDeLuta() + "   HP: " + carta.getVida());
-        atributosCarta.getStyleClass().add("atributos-carta-selecionada");
+        Label atkCarta = new Label("ATK: " + carta.getPoderDeLuta());
+        atkCarta.getStyleClass().add("atk-carta-selecionada");
+        StackPane.setAlignment(atkCarta, Pos.BOTTOM_LEFT);
+        StackPane.setMargin(atkCarta, new Insets(0, 10, 54, 10));
 
-        cartaBox.getChildren().addAll(imagemCarta, nomeCarta, atributosCarta);
+        Label hpCarta = new Label("HP: " + carta.getVida());
+        hpCarta.getStyleClass().add("hp-carta-selecionada");
+        StackPane.setAlignment(hpCarta, Pos.BOTTOM_RIGHT);
+        StackPane.setMargin(hpCarta, new Insets(0, 10, 54, 10));
+
+        cartaStack.getChildren().addAll(imagemCarta, nomeCarta, atkCarta, hpCarta);
+        cartaBox.getChildren().add(cartaStack);
 
         aplicarHover(cartaBox);
+        cartaBox.setOnMouseClicked(event -> mostrarDetalhesCarta(carta));
 
         return cartaBox;
     }
 
-    private ImageView criarImagemCarta(Carta carta, double largura, double altura) {
+    private void mostrarDetalhesCarta(Carta carta) {
+        nomeDetalhesCarta.setText(carta.getNome());
+        atkDetalhesCarta.setText("ATK: " + carta.getPoderDeLuta());
+        hpDetalhesCarta.setText("HP: " + carta.getVida());
+
+        String descricao = carta.getDescricao();
+        if (descricao == null || descricao.isBlank()) {
+            descricaoDetalhesCarta.setText("Esta carta não possui descrição cadastrada.");
+        } else {
+            descricaoDetalhesCarta.setText(descricao);
+        }
+
+        overlayDetalhesCarta.setVisible(true);
+        overlayDetalhesCarta.setManaged(true);
+        overlayDetalhesCarta.toFront();
+    }
+
+    @FXML
+    public void fecharDetalhesCarta() {
+        overlayDetalhesCarta.setVisible(false);
+        overlayDetalhesCarta.setManaged(false);
+    }
+
+    private Image carregarImagem(Carta carta) {
         String caminho = "/" + carta.getImagem();
         InputStream is = getClass().getResourceAsStream(caminho);
 
-        ImageView imageView;
-
         if (is != null) {
-            Image imagem = new Image(is);
-            imageView = new ImageView(imagem);
-        } else {
-            System.out.println("[IMG] Não encontrou imagem: " + caminho);
+            return new Image(is);
+        }
 
-            imageView = new ImageView();
+        System.out.println("[IMG] Não encontrou imagem: " + caminho);
+        return null;
+    }
+
+    private ImageView criarImagemCarta(Carta carta, double largura, double altura) {
+        Image imagem = carregarImagem(carta);
+        ImageView imageView = new ImageView();
+
+        if (imagem != null) {
+            imageView.setImage(imagem);
+        } else {
             imageView.setStyle("-fx-background-color: rgba(255,255,255,0.10);");
         }
 
@@ -210,6 +283,8 @@ public class SelecaoDeckController implements ControladorDeFluxo {
         tituloTela.setText("Escolha seu deck");
         painelCartasDeck.getChildren().clear();
 
+        fecharDetalhesCarta();
+
         painelDeckSelecionado.setVisible(false);
         painelDeckSelecionado.setManaged(false);
 
@@ -226,6 +301,10 @@ public class SelecaoDeckController implements ControladorDeFluxo {
     }
 
     private void configurarBotao(Button botao) {
+        if (botao == null) {
+            return;
+        }
+
         botao.setCache(true);
         botao.setCacheHint(CacheHint.SPEED);
         aplicarHover(botao);
