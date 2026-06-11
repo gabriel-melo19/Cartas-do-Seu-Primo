@@ -23,11 +23,17 @@ public class Carta {
     @JsonProperty("elemento")
     private Elemento elemento;
 
-    @JsonProperty("poderDeLuta")
-    private int poderDeLuta;
+    @JsonProperty("poderDeLutaBase")
+    private int poderDeLutaBase;
 
-    @JsonProperty("vida")
-    private int vida;
+    @JsonProperty("poderDeLutaAtual")
+    private int poderDeLutaAtual;
+
+    @JsonProperty("vidaBase")
+    private int vidaBase;
+
+    @JsonProperty("vidaAtual")
+    private int vidaAtual;
 
     //VEM DO JSON
     @JsonProperty("tipoEfeito")
@@ -51,8 +57,10 @@ public class Carta {
         this.imagem = imagem;
         this.descricao = descricao;
         this.elemento = elemento;
-        this.poderDeLuta = poderDeLuta;
-        this.vida = vida;
+        this.poderDeLutaBase = poderDeLuta;
+        this.poderDeLutaAtual = poderDeLuta;
+        this.vidaBase = vida;
+        this.vidaAtual = vida;
         this.tipoEfeito = tipoEfeito;
         this.temEscudo = false;
     }
@@ -62,15 +70,31 @@ public class Carta {
     public String getImagem() { return imagem; }
     public String getDescricao() { return descricao; }
     public Elemento getElemento() { return elemento; }
-    public int getPoderDeLuta() { return poderDeLuta; }
-    public int getVida() { return vida; }
+    public int getPoderDeLutaBase() { return poderDeLutaBase; }
+    public int getPoderDeLutaAtual() {return poderDeLutaAtual; }
+    public int getVidaBase() { return vidaBase; }
+    public int getVidaAtual() { return vidaAtual; }
     public TipoEfeito getTipoEfeito() { return tipoEfeito; }
     public EfeitoCarta getEfeito() { return efeito; }
     public boolean temEscudo() { return temEscudo; }
-
     public void setEfeito(EfeitoCarta efeito) {
         this.efeito = efeito;
     }
+
+
+    public void aplicarModificadoresElementares(Carta oponente) {
+        if (oponente == null) return;
+
+        Elemento eu = this.elemento;
+        Elemento ele = oponente.getElemento();
+
+        double multDano = eu.getMultiplicadorAtaqueContra(ele);
+        double multVida = eu.getMultiplicadorVidaQuandoConfrontado(ele);
+
+        this.poderDeLutaAtual = Math.round(this.poderDeLutaBase * (float) multDano);
+        this.vidaAtual = Math.round(this.vidaBase * (float) multVida);
+    }
+
 
     public void ativarEscudo() {
         this.temEscudo = true;
@@ -88,7 +112,8 @@ public class Carta {
             return true;
         }
 
-        this.vida -= dano;
+        this.vidaAtual -= dano;
+        if (this.vidaAtual < 0) this.vidaAtual = 0;
         return false;
     }
 
@@ -102,6 +127,11 @@ public class Carta {
         return this.efeito != null;
     }
 
+    public void resetarStatus() {
+        this.vidaAtual = this.vidaBase;
+        this.poderDeLutaAtual = this.poderDeLutaBase;
+    }
+
     @Override
     public String toString() {
         String efeitoStr = temEfeito() ? efeito.getNomeEfeito() : "Sem efeito";
@@ -109,7 +139,7 @@ public class Carta {
 
         return String.format("%s[%s] %s | ATK: %d | HP: %d | %s",
                 escudoStr, this.nome, this.elemento,
-                this.poderDeLuta, this.vida, efeitoStr);
+                this.poderDeLutaBase, this.vidaAtual, efeitoStr);
     }
 
     @Override

@@ -195,12 +195,12 @@ public class SelecaoDeckController implements ControladorDeFluxo {
         StackPane.setAlignment(nomeCarta, Pos.BOTTOM_CENTER);
         StackPane.setMargin(nomeCarta, new Insets(0, 16, 14, 16));
 
-        Label atkCarta = new Label("ATK: " + carta.getPoderDeLuta());
+        Label atkCarta = new Label("ATK: " + carta.getPoderDeLutaBase());
         atkCarta.getStyleClass().add("atk-carta-selecionada");
         StackPane.setAlignment(atkCarta, Pos.BOTTOM_LEFT);
         StackPane.setMargin(atkCarta, new Insets(0, 10, 54, 10));
 
-        Label hpCarta = new Label("HP: " + carta.getVida());
+        Label hpCarta = new Label("HP: " + carta.getVidaBase());
         hpCarta.getStyleClass().add("hp-carta-selecionada");
         StackPane.setAlignment(hpCarta, Pos.BOTTOM_RIGHT);
         StackPane.setMargin(hpCarta, new Insets(0, 10, 54, 10));
@@ -216,8 +216,8 @@ public class SelecaoDeckController implements ControladorDeFluxo {
 
     private void mostrarDetalhesCarta(Carta carta) {
         nomeDetalhesCarta.setText(carta.getNome());
-        atkDetalhesCarta.setText("ATK: " + carta.getPoderDeLuta());
-        hpDetalhesCarta.setText("HP: " + carta.getVida());
+        atkDetalhesCarta.setText("ATK: " + carta.getPoderDeLutaBase());
+        hpDetalhesCarta.setText("HP: " + carta.getVidaBase());
 
         String descricao = carta.getDescricao();
         if (descricao == null || descricao.isBlank()) {
