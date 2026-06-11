@@ -5,8 +5,8 @@
     "imagem": "com/cardgame/img/cartas/arvore_de_ferro.png",
     "descricao": "Uma guardiã vegetal de tronco endurecido como metal.",
     "elemento": "METAL",
-    "poderDeLuta": 78,
-    "vida": 92,
+    "poderDeLutaBase": 78,
+    "vidaBase": 92,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -15,8 +15,8 @@
     "imagem": "com/cardgame/img/cartas/balatro.png",
     "descricao": "Uma figura enigmática que altera o rumo da batalha.",
     "elemento": "TREVAS",
-    "poderDeLuta": 83,
-    "vida": 67,
+    "poderDeLutaBase": 83,
+    "vidaBase": 67,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -25,8 +25,8 @@
     "imagem": "com/cardgame/img/cartas/chama_da_raposa.png",
     "descricao": "Uma criatura veloz envolta em fogo traiçoeiro.",
     "elemento": "FOGO",
-    "poderDeLuta": 89,
-    "vida": 60,
+    "poderDeLutaBase": 89,
+    "vidaBase": 60,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -35,8 +35,8 @@
     "imagem": "com/cardgame/img/cartas/creep_da_nevoa.png",
     "descricao": "Surge em silêncio e desestabiliza o inimigo.",
     "elemento": "AGUA",
-    "poderDeLuta": 68,
-    "vida": 80,
+    "poderDeLutaBase": 68,
+    "vidaBase": 80,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -45,8 +45,8 @@
     "imagem": "com/cardgame/img/cartas/filosofo.png",
     "descricao": "Prefere inverter a vantagem do oponente com inteligência.",
     "elemento": "LUZ",
-    "poderDeLuta": 57,
-    "vida": 86,
+    "poderDeLutaBase": 57,
+    "vidaBase": 86,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -55,8 +55,8 @@
     "imagem": "com/cardgame/img/cartas/gaiola_de_faraday.png",
     "descricao": "Uma defesa elétrica que neutraliza ameaças próximas.",
     "elemento": "ELETRICO",
-    "poderDeLuta": 64,
-    "vida": 95,
+    "poderDeLutaBase": 64,
+    "vidaBase": 95,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -65,8 +65,8 @@
     "imagem": "com/cardgame/img/cartas/gotas_de_metal.png",
     "descricao": "Fragmentos metálicos líquidos que atingem com precisão.",
     "elemento": "METAL",
-    "poderDeLuta": 81,
-    "vida": 63,
+    "poderDeLutaBase": 81,
+    "vidaBase": 63,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -75,8 +75,8 @@
     "imagem": "com/cardgame/img/cartas/inimigo_espelhado.png",
     "descricao": "Reflete a condição da batalha contra quem o enfrenta.",
     "elemento": "LUZ",
-    "poderDeLuta": 76,
-    "vida": 72,
+    "poderDeLutaBase": 76,
+    "vidaBase": 72,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -85,8 +85,8 @@
     "imagem": "com/cardgame/img/cartas/invasor_de_redes.png",
     "descricao": "Ataca sistemas e desmonta a vantagem adversária.",
     "elemento": "ELETRICO",
-    "poderDeLuta": 85,
-    "vida": 58,
+    "poderDeLutaBase": 85,
+    "vidaBase": 58,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -95,8 +95,8 @@
     "imagem": "com/cardgame/img/cartas/luz_azul.png",
     "descricao": "Uma energia calma que protege antes de reagir.",
     "elemento": "LUZ",
-    "poderDeLuta": 72,
-    "vida": 78,
+    "poderDeLutaBase": 72,
+    "vidaBase": 78,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -105,8 +105,8 @@
     "imagem": "com/cardgame/img/cartas/sapo_elegante.png",
     "descricao": "Discreto, refinado e surpreendentemente resistente.",
     "elemento": "AGUA",
-    "poderDeLuta": 61,
-    "vida": 87,
+    "poderDeLutaBase": 61,
+    "vidaBase": 87,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -115,8 +115,8 @@
     "imagem": "com/cardgame/img/cartas/sapo_trevoso.png",
     "descricao": "Atua nas sombras e vira o jogo em silêncio.",
     "elemento": "TREVAS",
-    "poderDeLuta": 82,
-    "vida": 66,
+    "poderDeLutaBase": 82,
+    "vidaBase": 66,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -125,8 +125,8 @@
     "imagem": "com/cardgame/img/cartas/toco.png",
     "descricao": "Parece simples, mas absorve muito dano.",
     "elemento": "TERRA",
-    "poderDeLuta": 52,
-    "vida": 98,
+    "poderDeLutaBase": 52,
+    "vidaBase": 98,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -135,8 +135,8 @@
     "imagem": "com/cardgame/img/cartas/tronco_que_danca.png",
     "descricao": "Se move de forma estranha e muda o ritmo do combate.",
     "elemento": "PLANTA",
-    "poderDeLuta": 79,
-    "vida": 71,
+    "poderDeLutaBase": 79,
+    "vidaBase": 71,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -145,8 +145,8 @@
     "imagem": "com/cardgame/img/cartas/uma_lei.png",
     "descricao": "Impõe ordem e reorganiza o campo de batalha.",
     "elemento": "LUZ",
-    "poderDeLuta": 67,
-    "vida": 85,
+    "poderDeLutaBase": 67,
+    "vidaBase": 85,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -155,8 +155,8 @@
     "imagem": "com/cardgame/img/cartas/vinhas.png",
     "descricao": "Crescem rápido e seguram qualquer avanço inimigo.",
     "elemento": "PLANTA",
-    "poderDeLuta": 73,
-    "vida": 83,
+    "poderDeLutaBase": 73,
+    "vidaBase": 83,
     "tipoEfeito": "ESCUDO_INICIAL"
   },
   {
@@ -165,8 +165,8 @@
     "imagem": "com/cardgame/img/cartas/violino_de_claudios.png",
     "descricao": "Uma melodia rara que altera o equilíbrio do duelo.",
     "elemento": "GELO",
-    "poderDeLuta": 70,
-    "vida": 75,
+    "poderDeLutaBase": 70,
+    "vidaBase": 75,
     "tipoEfeito": "ESCUDO_INICIAL"
   }
 ]
