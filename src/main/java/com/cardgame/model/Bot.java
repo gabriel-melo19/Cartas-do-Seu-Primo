@@ -27,11 +27,22 @@ public class Bot extends Jogador {
     @JsonProperty("dificuldade")
     private final Dificuldade dificuldade;
 
-    private static final Random RANDOM = new Random();
-    private static int contadorBots = 0;
+    @JsonProperty("descricao")
+    private final String descricao;
 
-    public Bot(String nome, Deck deckInicial, Dificuldade dificuldade) {
-        super("BOT_" + (++contadorBots), nome, deckInicial);
+    @JsonProperty("imagem")
+    private final String imagem;
+
+    private static final Random RANDOM = new Random();
+
+    public Bot(String id, String nome, String descricao, String imagem, Deck deckInicial, Dificuldade dificuldade) {
+        super(
+                Objects.requireNonNull(id, "ID não pode ser nulo"),
+                Objects.requireNonNull(nome, "Nome não pode ser nulo"),
+                Objects.requireNonNull(deckInicial, "Deck inicial não pode ser nulo")
+        );
+        this.descricao = Objects.requireNonNull(descricao, "Descrição não pode ser nula");
+        this.imagem = Objects.requireNonNull(imagem, "Imagem não pode ser nula");
         this.dificuldade = Objects.requireNonNull(dificuldade, "Dificuldade não pode ser nula");
     }
 
@@ -123,4 +134,6 @@ public class Bot extends Jogador {
     }
 
     public Dificuldade getDificuldade() { return dificuldade; }
+    public String getDescricao() { return descricao; }
+    public String getImagem() { return imagem; }
 }

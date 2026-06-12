@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.cardgame.ui.controller.CarregarSaveController"
+           stylesheets="@../css/estilo_menu.css"
+           pickOnBounds="false">
+
+    <VBox alignment="CENTER"
+          spacing="22.0">
+
+        <padding>
+            <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+        </padding>
+
+        <Label fx:id="tituloTela"
+               text="Escolha seu Save"
+               styleClass="titulo-save-simples" />
+
+        <ListView fx:id="listaSaves"
+                  prefHeight="220.0"
+                  prefWidth="360.0"
+                  maxWidth="360.0"
+                  styleClass="lista-saves-simples" />
+
+        <HBox alignment="CENTER" spacing="40.0">
+            <Button fx:id="botaoCarregar"
+                    text="Carregar Save"
+                    onAction="#carregarSaveSelecionado"
+                    styleClass="botao-menu"
+                    prefWidth="180.0" />
+
+            <Button fx:id="botaoVoltar"
+                    text="Voltar"
+                    onAction="#voltarParaMenu"
+                    styleClass="botao-menu"
+                    prefWidth="140.0" />
+        </HBox>
+
+        <Label fx:id="labelStatus"
+               text="Selecione um save da lista."
+               styleClass="texto-save-simples" />
+    </VBox>
+</StackPane>

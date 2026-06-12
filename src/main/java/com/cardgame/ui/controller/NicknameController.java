@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import com.cardgame.logic.SessaoJogo;
 
 /**
  * Controller da tela de nickname.
@@ -104,9 +105,9 @@ public class NicknameController implements ControladorDeFluxo {
             return;
         }
 
+        SessaoJogo.setNicknameAtual(nickname);
         System.out.println("[NICKNAME] Confirmado: " + nickname);
 
-        // Fade out no painel antes do zoom, igual ao projeto anterior
         FadeTransition fadeOut = new FadeTransition(
                 Duration.millis(300), painelNickname
         );

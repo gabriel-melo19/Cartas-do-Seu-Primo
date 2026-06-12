@@ -1,0 +1,145 @@
+[
+  {
+    "id": "BOT_LEON",
+    "nome": "Leon S. Kennedy",
+    "descricao": "Agente altamente treinado para lidar com situações de alta periculosidade. Asiáticas de cabelo curto são seu único ponto fraco!",
+    "imagem": "com/cardgame/img/inimigos/leon_s_kennedy.png",
+    "dificuldade": "MEDIO",
+    "deck": {
+      "id": "DECK_BOT_LEON",
+      "nome": "Deck do Leon",
+      "descricao": "Um deck equilibrado, ofensivo e preciso.",
+      "cartasIds": ["1", "3", "7", "10", "17"]
+    }
+  },
+  {
+    "id": "BOT_ERICK",
+    "nome": "Erick Jackan",
+    "descricao": "Controla uma frigideira como ninguém. Mas não se engane, um único erro é o bastante para te expulsar da cozinha!",
+    "imagem": "com/cardgame/img/inimigos/erick_jackan.png",
+    "dificuldade": "FACIL",
+    "deck": {
+      "id": "DECK_BOT_ERICK",
+      "nome": "Deck do Erick",
+      "descricao": "Um deck resistente e simples de pilotar.",
+      "cartasIds": ["4", "6", "11", "13", "16"]
+    }
+  },
+  {
+    "id": "BOT_NEGONEY",
+    "nome": "NegoNey",
+    "descricao": "Após dominar a net com passinhos alucinantes, agora busca o poder supremo para dominar o MUNDO REAL.",
+    "imagem": "com/cardgame/img/inimigos/negoney.png",
+    "dificuldade": "DIFICIL",
+    "deck": {
+      "id": "DECK_BOT_NEGONEY",
+      "nome": "Deck do NegoNey",
+      "descricao": "Um deck agressivo e perigoso, feito para pressão total.",
+      "cartasIds": ["2", "5", "9", "12", "14"]
+    }
+  },
+  {
+    "id": "BOT_MADRUGA",
+    "nome": "Seu Madruga",
+    "descricao": "Sem pagar aluguel há meses, aprendeu a sobreviver com astúcia, coragem e um talento especial para escapar do perigo.",
+    "imagem": "com/cardgame/img/inimigos/seu_madruga.png",
+    "dificuldade": "FACIL",
+    "deck": {
+      "id": "DECK_BOT_MADRUGA",
+      "nome": "Deck do Madruga",
+      "descricao": "Um deck versátil, econômico e cheio de truques.",
+      "cartasIds": ["1", "4", "8", "11", "15"]
+    }
+  },
+  {
+    "id": "BOT_CHAPOLIN",
+    "nome": "Chapolin Colorado",
+    "descricao": "Pode até parecer atrapalhado, mas quando o caos começa ele sempre dá um jeito improvável de vencer.",
+    "imagem": "com/cardgame/img/inimigos/chapolin_colorado.png",
+    "dificuldade": "MEDIO",
+    "deck": {
+      "id": "DECK_BOT_CHAPOLIN",
+      "nome": "Deck do Chapolin",
+      "descricao": "Um deck criativo, imprevisível e muito equilibrado.",
+      "cartasIds": ["2", "6", "10", "13", "17"]
+    }
+  },
+  {
+    "id": "BOT_KIKO",
+    "nome": "Kiko",
+    "descricao": "Mimado, provocador e barulhento. Pode não parecer, mas adora vencer humilhando o adversário no detalhe.",
+    "imagem": "com/cardgame/img/inimigos/kiko.png",
+    "dificuldade": "FACIL",
+    "deck": {
+      "id": "DECK_BOT_KIKO",
+      "nome": "Deck do Kiko",
+      "descricao": "Um deck simples, rápido e irritantemente eficiente.",
+      "cartasIds": ["3", "5", "7", "12", "16"]
+    }
+  },
+  {
+    "id": "BOT_GOKU",
+    "nome": "Goku",
+    "descricao": "Luta sorrindo, melhora a cada turno e quase sempre encontra forças para superar qualquer desafio.",
+    "imagem": "com/cardgame/img/inimigos/goku.png",
+    "dificuldade": "MEDIO",
+    "deck": {
+      "id": "DECK_BOT_GOKU",
+      "nome": "Deck do Goku",
+      "descricao": "Um deck de crescimento constante e pressão progressiva.",
+      "cartasIds": ["1", "5", "9", "14", "17"]
+    }
+  },
+  {
+    "id": "BOT_VEGETA",
+    "nome": "Vegeta",
+    "descricao": "Orgulhoso e explosivo, entra em campo para provar que não existe ninguém acima dele.",
+    "imagem": "com/cardgame/img/inimigos/vegeta.png",
+    "dificuldade": "DIFICIL",
+    "deck": {
+      "id": "DECK_BOT_VEGETA",
+      "nome": "Deck do Vegeta",
+      "descricao": "Um deck agressivo, técnico e muito punitivo.",
+      "cartasIds": ["2", "4", "8", "12", "15"]
+    }
+  },
+  {
+    "id": "BOT_JOHN_WICK",
+    "nome": "John Wick",
+    "descricao": "Preciso, incansável e letal. Um erro contra ele normalmente custa a partida.",
+    "imagem": "com/cardgame/img/inimigos/john_wick.png",
+    "dificuldade": "DIFICIL",
+    "deck": {
+      "id": "DECK_BOT_JOHN_WICK",
+      "nome": "Deck do John Wick",
+      "descricao": "Um deck preciso, mortal e focado em finalização.",
+      "cartasIds": ["3", "6", "9", "13", "14"]
+    }
+  },
+  {
+    "id": "BOT_DEADPOOL",
+    "nome": "Deadpool",
+    "descricao": "Imprevisível, caótico e completamente sem noção. Justamente por isso, é perigosíssimo.",
+    "imagem": "com/cardgame/img/inimigos/deadpool.png",
+    "dificuldade": "MEDIO",
+    "deck": {
+      "id": "DECK_BOT_DEADPOOL",
+      "nome": "Deck do Deadpool",
+      "descricao": "Um deck insano, dinâmico e difícil de prever.",
+      "cartasIds": ["4", "7", "10", "11", "16"]
+    }
+  },
+  {
+    "id": "BOT_BATMAN",
+    "nome": "Batman",
+    "descricao": "Sem poderes, mas com preparo absoluto. Sempre parece estar dois passos à frente.",
+    "imagem": "com/cardgame/img/inimigos/batman.png",
+    "dificuldade": "DIFICIL",
+    "deck": {
+      "id": "DECK_BOT_BATMAN",
+      "nome": "Deck do Batman",
+      "descricao": "Um deck estratégico, sólido e muito inteligente.",
+      "cartasIds": ["5", "8", "11", "14", "17"]
+    }
+  }
+]

@@ -133,3 +133,90 @@
     -fx-scale-x: 0.97;
     -fx-scale-y: 0.97;
 }
+
+/* ======================
+   TELA DE CARREGAR SAVE
+   ====================== */
+
+.titulo-save-simples {
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+    -fx-text-fill: white;
+    -fx-padding: 0 0 10 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.texto-save-simples {
+    -fx-font-family: "Arial";
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-opacity: 0.90;
+    -fx-padding: 8 0 0 0;
+}
+
+.lista-saves-simples {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0;
+}
+
+.lista-saves-simples .viewport {
+    -fx-background-color: transparent;
+}
+
+.lista-saves-simples .corner {
+    -fx-background-color: transparent;
+}
+
+.lista-saves-simples .scroll-bar:vertical,
+.lista-saves-simples .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.lista-saves-simples .scroll-bar:vertical .track,
+.lista-saves-simples .scroll-bar:horizontal .track {
+    -fx-background-color: transparent;
+}
+
+.lista-saves-simples .scroll-bar:vertical .thumb,
+.lista-saves-simples .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgba(255,255,255,0.18);
+    -fx-background-radius: 8;
+}
+
+.lista-saves-simples .list-cell {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 22px;
+    -fx-alignment: center;
+    -fx-padding: 10 0 10 0;
+    -fx-opacity: 0.92;
+}
+
+.lista-saves-simples .list-cell:filled:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-opacity: 1.0;
+    -fx-cursor: hand;
+}
+
+.lista-saves-simples .list-cell:filled:selected,
+.lista-saves-simples .list-cell:filled:selected:focused {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-underline: true;
+    -fx-opacity: 1.0;
+}
+
+.lista-saves-simples .list-cell:empty {
+    -fx-background-color: transparent;
+}

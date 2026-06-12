@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.cardgame.ui.controller.SelecaoAdversarioController"
+           stylesheets="@../css/estilo_adversario.css"
+           pickOnBounds="false">
+
+    <VBox fx:id="containerPrincipal"
+          alignment="TOP_CENTER"
+          spacing="24.0"
+          maxWidth="1480.0">
+
+        <padding>
+            <Insets top="32.0" right="36.0" bottom="28.0" left="36.0"/>
+        </padding>
+
+        <Label fx:id="tituloTela"
+               text="Escolha seu adversário"
+               styleClass="titulo-tela" />
+
+        <BorderPane fx:id="areaSelecaoPrincipal"
+                    prefWidth="1380.0"
+                    prefHeight="650.0"
+                    maxWidth="1380.0"
+                    styleClass="area-selecao-principal">
+
+            <left>
+                <VBox fx:id="painelRosterContainer"
+                      spacing="16.0"
+                      prefWidth="860.0"
+                      maxWidth="860.0"
+                      BorderPane.alignment="CENTER_LEFT">
+
+                    <Label text="ADVERSÁRIOS"
+                           styleClass="subtitulo-selecao" />
+
+                    <ScrollPane fx:id="scrollAdversarios"
+                                fitToWidth="true"
+                                fitToHeight="true"
+                                hbarPolicy="NEVER"
+                                vbarPolicy="AS_NEEDED"
+                                pannable="false"
+                                prefViewportWidth="840.0"
+                                prefViewportHeight="560.0"
+                                styleClass="scroll-adversarios">
+
+                        <content>
+                            <FlowPane fx:id="painelListaAdversarios"
+                                      hgap="18.0"
+                                      vgap="18.0"
+                                      prefWrapLength="820.0"
+                                      alignment="TOP_CENTER"
+                                      styleClass="painel-lista-adversarios" />
+                        </content>
+                    </ScrollPane>
+                </VBox>
+            </left>
+
+            <right>
+                <VBox fx:id="painelAdversarioSelecionado"
+                      alignment="TOP_CENTER"
+                      spacing="18.0"
+                      prefWidth="430.0"
+                      maxWidth="430.0"
+                      visible="false"
+                      managed="false"
+                      styleClass="painel-adversario-selecionado"
+                      BorderPane.alignment="CENTER_RIGHT">
+
+                    <Label text="SELECIONADO"
+                           styleClass="subtitulo-selecao" />
+
+                    <StackPane fx:id="containerImagemSelecionado"
+                               prefWidth="360.0"
+                               prefHeight="360.0"
+                               maxWidth="360.0"
+                               maxHeight="360.0"
+                               styleClass="container-imagem-selecionado">
+
+                        <ImageView fx:id="imagemAdversarioSelecionado"
+                                   fitWidth="340.0"
+                                   fitHeight="340.0"
+                                   preserveRatio="true"
+                                   smooth="true"
+                                   styleClass="imagem-adversario-selecionado" />
+                    </StackPane>
+
+                    <Label fx:id="nomeAdversarioSelecionado"
+                           text="Nome do adversário"
+                           wrapText="true"
+                           styleClass="nome-adversario-selecionado" />
+
+                    <Label fx:id="dificuldadeAdversarioSelecionado"
+                           text="Dificuldade"
+                           styleClass="dificuldade-adversario-selecionado" />
+
+                    <Label fx:id="descricaoAdversarioSelecionado"
+                           text="Descrição do adversário selecionado."
+                           wrapText="true"
+                           maxWidth="360.0"
+                           styleClass="descricao-adversario-selecionado" />
+
+                </VBox>
+            </right>
+        </BorderPane>
+
+        <HBox fx:id="barraAcoes"
+              alignment="CENTER"
+              spacing="40.0">
+
+            <Button fx:id="botaoVoltar"
+                    text="VOLTAR"
+                    onAction="#voltarParaSelecaoDeck"
+                    styleClass="botao-voltar" />
+
+            <Button fx:id="botaoIniciarPartida"
+                    text="INICIAR PARTIDA"
+                    onAction="#iniciarPartida"
+                    styleClass="botao-acao-adversario" />
+
+        </HBox>
+
+    </VBox>
+
+</StackPane>

@@ -1,9 +1,12 @@
 package com.cardgame.ui.controller;
 
 import com.cardgame.logic.MontadorDeck;
+import com.cardgame.logic.SaveData;
+import com.cardgame.logic.SessaoJogo;
 import com.cardgame.model.Carta;
 import com.cardgame.model.Deck;
 import com.cardgame.persistence.RepositorioJSON;
+import com.cardgame.persistence.RepositorioSave;
 import com.cardgame.ui.ControladorDeFluxo;
 import com.cardgame.ui.ScreenManager;
 import javafx.animation.Interpolator;
@@ -270,10 +273,32 @@ public class SelecaoDeckController implements ControladorDeFluxo {
     @FXML
     public void confirmarDeckSelecionado() {
         if (deckSelecionadoAtual == null) {
+            System.out.println("[DECK] Nenhum deck foi selecionado.");
             return;
         }
 
+        String nickname = obterNicknameAtual();
+        SaveData saveExistente = RepositorioSave.carregar(nickname);
+
+        if (saveExistente == null) {
+            saveExistente = new SaveData(nickname, deckSelecionadoAtual.getId());
+        } else {
+            saveExistente.setDeckIdSelecionado(deckSelecionadoAtual.getId());
+        }
+
+        RepositorioSave.salvar(saveExistente);
+
         System.out.println("[DECK] Deck confirmado: " + deckSelecionadoAtual.getNome());
+        System.out.println("[SAVE] Save atualizado para: " + nickname);
+
+        if (screenManager != null) {
+            screenManager.navegarPara("/com/cardgame/fxml/selecao_adversario.fxml");
+        }
+    }
+
+    private String obterNicknameAtual() {
+        String nickname = SessaoJogo.getNicknameAtual();
+        return (nickname == null || nickname.isBlank()) ? "player" : nickname;
     }
 
     @FXML

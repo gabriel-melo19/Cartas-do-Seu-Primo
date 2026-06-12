@@ -1,5 +1,6 @@
 package com.cardgame.ui.controller;
 
+import com.cardgame.logic.SessaoJogo;
 import com.cardgame.ui.ControladorDeFluxo;
 import com.cardgame.ui.ScreenManager;
 import javafx.animation.FadeTransition;
@@ -14,7 +15,7 @@ import javafx.util.Duration;
 
 /**
  * Controller do menu principal.
- * Cuida das animações de entrada e da navegação para o nickname.
+ * Cuida das animações de entrada e da navegação para as telas do jogo.
  */
 public class MenuPrincipalController implements ControladorDeFluxo {
 
@@ -52,6 +53,10 @@ public class MenuPrincipalController implements ControladorDeFluxo {
     }
 
     private void configurarBotao(Button botao) {
+        if (botao == null) {
+            return;
+        }
+
         botao.setCache(true);
         botao.setCacheHint(CacheHint.SPEED);
 
@@ -82,12 +87,20 @@ public class MenuPrincipalController implements ControladorDeFluxo {
 
     @FXML
     public void iniciarNovoJogo() {
-        screenManager.navegarPara("/com/cardgame/fxml/nickname.fxml");
+        SessaoJogo.setCarregandoDeSave(false);
+
+        if (screenManager != null) {
+            screenManager.navegarPara("/com/cardgame/fxml/nickname.fxml");
+        }
     }
 
     @FXML
     public void carregarJogo() {
-        System.out.println("[MENU] Acessando sistema de persistência de saves...");
+        System.out.println("[MENU] Abrindo tela de carregar save...");
+
+        if (screenManager != null) {
+            screenManager.navegarPara("/com/cardgame/fxml/menu_carregar_save.fxml");
+        }
     }
 
     @FXML

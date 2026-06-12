@@ -1,0 +1,7 @@
+{
+  "nickname" : "player",
+  "deckIdSelecionado" : "DECK_1",
+  "botsDerrotados" : [ ],
+  "cartasGanhas" : [ ],
+  "ultimoBotEnfrentado" : ""
+}
