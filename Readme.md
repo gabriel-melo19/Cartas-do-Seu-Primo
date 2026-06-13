@@ -129,5 +129,5 @@ Utiliza o ecossistema Maven para gerenciamento de dependências e Jackson para p
 
 - **Gabriel Melo**
 - **Marcos William**
-- **Wesley Cardozo**
+- **Wesley Kardozo**
 
