@@ -15,7 +15,7 @@
           alignment="CENTER"
           spacing="22.0">
 
-        <Label text="DECKHERO" styleClass="titulo-jogo" />
+        <Label text="Prompt Cards" styleClass="titulo-jogo" />
 
         <Button fx:id="botaoNovoJogo"
                 text="NOVO JOGO"
