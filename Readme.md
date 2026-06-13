@@ -111,69 +111,15 @@ Utiliza o ecossistema Maven para gerenciamento de dependências e Jackson para p
                     │   └── selecao_deck.fxml
                     └── img
                         ├── cartas
-                        │   ├── a_cota.png
-                        │   ├── arlindo.png
-                        │   ├── arvore_de_ferro.png
-                        │   ├── a_senha.png
-                        │   ├── avenged_sevenfold.png
-                        │   ├── baba_is_you.png
-                        │   ├── balatro.png
-                        │   ├── cafe_bao.png
-                        │   ├── chama_da_raposa.png
-                        │   ├── charles_kuck.png
-                        │   ├── cojack.png
-                        │   ├── congalala.png
-                        │   ├── creep_da_nevoa.png
-                        │   ├── creeper.png
-                        │   ├── empregado_do_mes.png
-                        │   ├── eneas_carneiro.png
-                        │   ├── exodia.png
-                        │   ├── filosofo.png
-                        │   ├── gaiola_de_faraday.png
-                        │   ├── gotas_de_metal.png
-                        │   ├── igeb.png
-                        │   ├── inimigo_espelhado.png
-                        │   ├── invasor_de_redes.png
-                        │   ├── kiko_guitar_hero.png
-                        │   ├── la_mano_de_dios.png
-                        │   ├── life_is_but_a_dream.png
-                        │   ├── luz_azul.png
-                        │   ├── moon_dog.png
-                        │   ├── odio.png
-                        │   ├── olheca.png
-                        │   ├── PC.png
-                        │   ├── rick_astrey.png
-                        │   ├── sao_paulo.png
-                        │   ├── sapo_elegante.png
-                        │   ├── sapo_trevoso.png
-                        │   ├── sonic.png
-                        │   ├── tenacious_d.png
-                        │   ├── tiba.png
-                        │   ├── toco.png
-                        │   ├── tronco_que_danca.png
-                        │   ├── trumpet_boy.png
-                        │   ├── tudo_pelo_aluguel.png
-                        │   ├── uma_lei.png
-                        │   ├── validation.png
-                        │   ├── vinhas.png
-                        │   ├── violino_de_claudios.png
-                        │   ├── voce.png
-                        │   ├── washii.png
-                        │   └── yung-lixo.png
+                        │   ├── carta01.png
+                        │   ├── carta02.png
+                        │   └── ...
                         ├── fundos
                         │   └── fundo_menu.jpg
                         ├── inimigos
-                        │   ├── batman.png
-                        │   ├── chapolin.png
-                        │   ├── deadpool.png
-                        │   ├── erick_jackan.png
-                        │   ├── goku.png
-                        │   ├── johnwick.png
-                        │   ├── kiko.png
-                        │   ├── leon_s_kennedy.png
-                        │   ├── negonei.png
-                        │   ├── seu_madruga.png
-                        │   └── vegeta.png
+                        │   ├── inimigo01.png
+                        │   ├── inimigo02.png
+                        │   └── ...
                         └── Logo.png
 ```
 
