@@ -329,6 +329,7 @@ public class JanelaBatalhaController implements ControladorDeFluxo {
         labelCartaBotStatus.setText("ATK " + carta.getPoderDeLutaAtual() + " | HP " + carta.getVidaAtual());
     }
 
+    @FXML
     private void selecionarCarta(Carta carta) {
         if (jogadorHumanoAtual == null || carta == null) {
             labelStatusTurno.setText("Jogador não inicializado.");
@@ -359,10 +360,16 @@ public class JanelaBatalhaController implements ControladorDeFluxo {
         renderizarCampoJogador();
         atualizarContadores();
 
+        if (sistemaCombate != null && botAtual != null) {
+            sistemaCombate.botJogaCartaAutomaticamente();  // Nova função
+            renderizarCampoBot();
+            atualizarContadores();
+        }
+
         if (resultado == JogadaResultado.TROCA_REALIZADA) {
-            labelStatusTurno.setText("Carta trocada. Passe o turno.");
+            labelStatusTurno.setText("Carta trocada. Passe o turno para combinar.");
         } else {
-            labelStatusTurno.setText("Carta selecionada. Passe o turno.");
+            labelStatusTurno.setText("Ambos os lados prontos! Passe o turno para combinar.");
         }
     }
 
@@ -468,7 +475,7 @@ public class JanelaBatalhaController implements ControladorDeFluxo {
             mapper.writerWithDefaultPrettyPrinter().writeValue(arquivoSave, saveData);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("[ERROR] Falha ao salvar resultado: " + e.getMessage());
         }
     }
 

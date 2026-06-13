@@ -27,40 +27,6 @@ public class CarregarSaveController implements ControladorDeFluxo {
 
     private ScreenManager screenManager;
 
-    @FXML
-    public void initialize() {
-        if (botaoCarregar != null) {
-            botaoCarregar.setDisable(true);
-        }
-
-        if (listaSaves != null) {
-            listaSaves.getSelectionModel().selectedItemProperty().addListener((obs, antigo, novo) -> {
-                boolean temSelecao = novo != null && !novo.isBlank();
-
-                if (botaoCarregar != null) {
-                    botaoCarregar.setDisable(!temSelecao);
-                }
-
-                if (labelStatus != null) {
-                    if (temSelecao) {
-                        labelStatus.setText("Save selecionado: " + novo);
-                    } else {
-                        labelStatus.setText("Selecione um save da lista.");
-                    }
-                }
-            });
-
-            listaSaves.setOnMouseClicked(event -> {
-                if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
-                    String selecionado = listaSaves.getSelectionModel().getSelectedItem();
-                    if (selecionado != null && !selecionado.isBlank()) {
-                        carregarSaveSelecionado();
-                    }
-                }
-            });
-        }
-    }
-
     @Override
     public void configurar(ScreenManager screenManager) {
         this.screenManager = screenManager;

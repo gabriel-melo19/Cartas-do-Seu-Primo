@@ -95,7 +95,6 @@ public final class AudioManager {
 
         for (Node node : nodesInterativos) {
             registrarHover(node);
-            registrarClique(node);
         }
     }
 
@@ -105,7 +104,6 @@ public final class AudioManager {
         }
 
         registrarHover(node);
-        registrarClique(node);
     }
 
     private static void registrarHover(Node node) {
@@ -115,15 +113,6 @@ public final class AudioManager {
 
         node.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> tocarHover());
         node.getProperties().put("hover-audio-registrado", true);
-    }
-
-    private static void registrarClique(Node node) {
-        if (Boolean.TRUE.equals(node.getProperties().get("click-audio-registrado"))) {
-            return;
-        }
-
-        node.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> tocarHover());
-        node.getProperties().put("click-audio-registrado", true);
     }
 
     private static boolean ehNodeInterativo(Node node) {

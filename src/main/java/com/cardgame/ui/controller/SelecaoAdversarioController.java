@@ -37,7 +37,6 @@ public class SelecaoAdversarioController implements ControladorDeFluxo {
     private static final String CAMINHO_TELA_SELECAO_DECK = "/com/cardgame/fxml/selecao_deck.fxml";
 
     @FXML private VBox containerPrincipal;
-    @FXML private ScrollPane scrollAdversarios;
     @FXML private FlowPane painelListaAdversarios;
 
     @FXML private VBox painelAdversarioSelecionado;
@@ -47,8 +46,6 @@ public class SelecaoAdversarioController implements ControladorDeFluxo {
     @FXML private Label dificuldadeAdversarioSelecionado;
     @FXML private Label descricaoAdversarioSelecionado;
 
-    @FXML private Button botaoIniciarPartida;
-    @FXML private Button botaoVoltar;
 
     private final List<Bot> botsDisponiveis = new ArrayList<>();
     private final List<VBox> cardsCriados = new ArrayList<>();

@@ -45,31 +45,27 @@ public class SistemaCombate {
     public DueloResultado passarTurno() {
         DueloResultado resultado = new DueloResultado();
         resultado.vitoria = false;
-        resultado.valorDinheiro = 0;
         resultado.batalhouComSucesso = false;
 
-        bot.executarAcoesDoTurno(humano, this);
+        if (bot != null) {
+            bot.executarAcoesDoTurno(humano, this);
+        }
 
-        if (humano.perdeuTudo() || bot.perdeuTudo()) {
+        if (humano.perdeuTudo()) {
+            verificarVitoria(resultado);
+            return resultado;
+        }
+        if (bot.perdeuTudo()) {
             verificarVitoria(resultado);
             return resultado;
         }
 
-        if (!humano.temCartaNoTabuleiro() && !bot.temCartaNoTabuleiro()) {
-            resultado.mensagem = "Nenhuma carta em campo.";
-            verificarVitoria(resultado);
-            return resultado;
-        }
+        if (!humano.temCartaNoTabuleiro() || !bot.temCartaNoTabuleiro()) {
+            resultado.mensagem = "Necessário ter carta no campo para combater.";
 
-        if (!humano.temCartaNoTabuleiro()) {
-            resultado.mensagem = "Você está sem carta no tabuleiro.";
-            verificarVitoria(resultado);
-            return resultado;
-        }
-
-        if (!bot.temCartaNoTabuleiro()) {
-            resultado.mensagem = "O bot está sem carta no tabuleiro.";
-            verificarVitoria(resultado);
+            if (humano.perdeuTudo() || bot.perdeuTudo()) {
+                verificarVitoria(resultado);
+            }
             return resultado;
         }
 
@@ -98,6 +94,7 @@ public class SistemaCombate {
             if (resultado.mensagem == null || resultado.mensagem.isBlank()) {
                 resultado.mensagem = "Combate concluído. Próximo turno.";
             }
+            inicioDoTurnoHumano();
         }
 
         return resultado;
@@ -176,14 +173,6 @@ public class SistemaCombate {
             resultado.vitoria = true;
             resultado.mensagem = "Vitória! Oponente sem cartas.";
             resultado.valorDinheiro = 50 * bot.getDificuldade().getNivel();
-
-            List<Carta> cartasGanhas = bot.gerarRecompensa();
-            resultado.cartasGanhas.clear();
-            resultado.cartasGanhas.addAll(cartasGanhas);
-
-            for (Carta carta : cartasGanhas) {
-                humano.adicionarCartaPremio(carta);
-            }
             return;
         }
 
@@ -191,6 +180,12 @@ public class SistemaCombate {
         resultado.valorDinheiro = 0;
         if (resultado.mensagem == null || resultado.mensagem.isBlank()) {
             resultado.mensagem = "Combate concluído. Próximo turno.";
+        }
+    }
+
+    public void botJogaCartaAutomaticamente() {
+        if (bot != null && !bot.temCartaNoTabuleiro()) {
+            bot.executarAcoesDoTurno(humano, this);
         }
     }
 }

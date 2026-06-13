@@ -114,19 +114,4 @@ public enum Elemento {
         return 1.0;
     }
 
-    /**
-     * Retorna o multiplicador de vida quando confrontado com outro elemento.
-     * Regra do projeto: elemento forte também ganha bonus defensivo.
-     *
-     * @param adversario Elemento no tabuleiro oposto
-     * @return Multiplicador de vida
-     */
-    public double getMultiplicadorVidaQuandoConfrontado(Elemento adversario) {
-        if (this.ehForteContra(adversario)) {
-            return 1.3; // Bônus defensivo moderado
-        } else if (adversario.ehForteContra(this)) {
-            return 0.8; // Desvantagem defensiva
-        }
-        return 1.0;
-    }
 }

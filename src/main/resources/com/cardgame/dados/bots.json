@@ -9,7 +9,7 @@
       "id": "DECK_BOT_LEON",
       "nome": "Deck do Leon",
       "descricao": "Um deck equilibrado, ofensivo e preciso.",
-      "cartasIds": ["1", "3", "7", "10", "17"]
+      "cartasIds": ["6", "15", "5", "14", "2"]
     }
   },
   {
@@ -22,20 +22,20 @@
       "id": "DECK_BOT_ERICK",
       "nome": "Deck do Erick",
       "descricao": "Um deck resistente e simples de pilotar.",
-      "cartasIds": ["4", "6", "11", "13", "16"]
+      "cartasIds": ["4", "20", "46", "19", "40"]
     }
   },
   {
     "id": "BOT_NEGONEY",
     "nome": "NegoNey",
     "descricao": "Após dominar a net com passinhos alucinantes, agora busca o poder supremo para dominar o MUNDO REAL.",
-    "imagem": "com/cardgame/img/inimigos/negoney.png",
+    "imagem": "com/cardgame/img/inimigos/negonei.png",
     "dificuldade": "DIFICIL",
     "deck": {
       "id": "DECK_BOT_NEGONEY",
       "nome": "Deck do NegoNey",
       "descricao": "Um deck agressivo e perigoso, feito para pressão total.",
-      "cartasIds": ["2", "5", "9", "12", "14"]
+      "cartasIds": ["47", "14", "17", "29", "38"]
     }
   },
   {
@@ -48,20 +48,20 @@
       "id": "DECK_BOT_MADRUGA",
       "nome": "Deck do Madruga",
       "descricao": "Um deck versátil, econômico e cheio de truques.",
-      "cartasIds": ["1", "4", "8", "11", "15"]
+      "cartasIds": ["38", "28", "30", "33", "42"]
     }
   },
   {
     "id": "BOT_CHAPOLIN",
     "nome": "Chapolin Colorado",
     "descricao": "Pode até parecer atrapalhado, mas quando o caos começa ele sempre dá um jeito improvável de vencer.",
-    "imagem": "com/cardgame/img/inimigos/chapolin_colorado.png",
+    "imagem": "com/cardgame/img/inimigos/chapolin.png",
     "dificuldade": "MEDIO",
     "deck": {
       "id": "DECK_BOT_CHAPOLIN",
       "nome": "Deck do Chapolin",
       "descricao": "Um deck criativo, imprevisível e muito equilibrado.",
-      "cartasIds": ["2", "6", "10", "13", "17"]
+      "cartasIds": ["17", "11", "9", "37", "43"]
     }
   },
   {
@@ -74,7 +74,7 @@
       "id": "DECK_BOT_KIKO",
       "nome": "Deck do Kiko",
       "descricao": "Um deck simples, rápido e irritantemente eficiente.",
-      "cartasIds": ["3", "5", "7", "12", "16"]
+      "cartasIds": ["3", "36", "41", "32", "35"]
     }
   },
   {
@@ -87,7 +87,7 @@
       "id": "DECK_BOT_GOKU",
       "nome": "Deck do Goku",
       "descricao": "Um deck de crescimento constante e pressão progressiva.",
-      "cartasIds": ["1", "5", "9", "14", "17"]
+      "cartasIds": ["16", "7", "29", "31", "39"]
     }
   },
   {
@@ -100,20 +100,20 @@
       "id": "DECK_BOT_VEGETA",
       "nome": "Deck do Vegeta",
       "descricao": "Um deck agressivo, técnico e muito punitivo.",
-      "cartasIds": ["2", "4", "8", "12", "15"]
+      "cartasIds": ["7", "15", "22", "31", "46"]
     }
   },
   {
     "id": "BOT_JOHN_WICK",
     "nome": "John Wick",
     "descricao": "Preciso, incansável e letal. Um erro contra ele normalmente custa a partida.",
-    "imagem": "com/cardgame/img/inimigos/john_wick.png",
+    "imagem": "com/cardgame/img/inimigos/johnwick.png",
     "dificuldade": "DIFICIL",
     "deck": {
       "id": "DECK_BOT_JOHN_WICK",
       "nome": "Deck do John Wick",
       "descricao": "Um deck preciso, mortal e focado em finalização.",
-      "cartasIds": ["3", "6", "9", "13", "14"]
+      "cartasIds": ["17", "47", "14", "7", "3"]
     }
   },
   {
@@ -126,7 +126,7 @@
       "id": "DECK_BOT_DEADPOOL",
       "nome": "Deck do Deadpool",
       "descricao": "Um deck insano, dinâmico e difícil de prever.",
-      "cartasIds": ["4", "7", "10", "11", "16"]
+      "cartasIds": ["2", "12", "36", "3", "49"]
     }
   },
   {
@@ -139,7 +139,7 @@
       "id": "DECK_BOT_BATMAN",
       "nome": "Deck do Batman",
       "descricao": "Um deck estratégico, sólido e muito inteligente.",
-      "cartasIds": ["5", "8", "11", "14", "17"]
+      "cartasIds": ["22", "31", "46", "33", "15"]
     }
   }
 ]

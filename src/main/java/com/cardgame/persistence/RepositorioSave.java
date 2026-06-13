@@ -70,46 +70,4 @@ public class RepositorioSave {
             return null;
         }
     }
-
-    public static boolean existeSave(String nickname) {
-        try {
-            Path caminho = getCaminhoSave(nickname);
-            return Files.exists(caminho);
-        } catch (IOException e) {
-            return false;
-        }
-    }
-
-    public static List<SaveData> listarSaves() {
-        List<SaveData> saves = new ArrayList<>();
-
-        try {
-            Path pasta = getPastaSavesPath();
-
-            Files.list(pasta)
-                    .filter(path -> path.toString().endsWith(".json"))
-                    .forEach(path -> {
-                        try {
-                            SaveData save = MAPPER.readValue(path.toFile(), SaveData.class);
-                            saves.add(save);
-                        } catch (IOException e) {
-                            System.out.println("[SAVE] Erro ao ler arquivo: " + path.getFileName());
-                        }
-                    });
-
-        } catch (IOException e) {
-            System.out.println("[SAVE] Erro ao listar saves: " + e.getMessage());
-        }
-
-        return saves;
-    }
-
-    public static void deletar(String nickname) {
-        try {
-            Path caminho = getCaminhoSave(nickname);
-            Files.deleteIfExists(caminho);
-        } catch (IOException e) {
-            System.out.println("[SAVE] Erro ao deletar save: " + e.getMessage());
-        }
-    }
 }

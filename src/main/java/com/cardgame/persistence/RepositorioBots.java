@@ -3,9 +3,12 @@ package com.cardgame.persistence;
 import com.cardgame.model.Bot;
 import com.cardgame.model.Carta;
 import com.cardgame.model.Deck;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -74,8 +77,12 @@ public class RepositorioBots {
                 bots.add(bot);
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.err.println("[ERRO DE ARQUIVO] " + RESOURCE_PATH + " não encontrado.");
+        } catch (JsonProcessingException e) {
+            System.err.println("[ERRO JSON] Arquivo " + RESOURCE_PATH + " mal formatado.");
+        } catch (IOException e) {
+            System.err.println("[ERRO IO] Falha ao ler " + RESOURCE_PATH);
         }
 
         return bots;

@@ -2,9 +2,12 @@ package com.cardgame.persistence;
 
 import com.cardgame.effects.EfeitoFactory;
 import com.cardgame.model.Carta;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,25 +38,24 @@ public class RepositorioJSON {
 
             return cartas;
 
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            System.err.println("[ERRO DE ARQUIVO] " + e.getMessage());
+            return createEmptyList("cartas.json", RESOURCE_PATH);
+        } catch (JsonProcessingException e) {
+            System.err.println("[ERRO DE PARSE] JSON inválido em " + RESOURCE_PATH + ": " + e.getMessage());
+            return createEmptyList("cartas.json", RESOURCE_PATH);
+        } catch (IOException e) {
+            System.err.println("[ERRO IO] Falha ao ler " + RESOURCE_PATH + ": " + e.getMessage());
+            return createEmptyList("cartas.json", RESOURCE_PATH);
+        } catch (RuntimeException e) {
+            System.err.println("[ERRO INESPERADO] Falha ao criar efeito para carta: " + e.getMessage());
             e.printStackTrace();
-            return new ArrayList<>();
+            throw e;
         }
     }
 
-    public static void salvarCartas(List<Carta> cartas) {
-        try {
-            Path path = Path.of(SAVE_PATH);
-            Files.createDirectories(path.getParent());
-            mapper.writerWithDefaultPrettyPrinter().writeValue(path.toFile(), cartas);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void adicionarCarta(Carta carta) {
-        List<Carta> cartas = new ArrayList<>(listarCartas());
-        cartas.add(carta);
-        salvarCartas(cartas);
+    private static List<Carta> createEmptyList(String descricao, String path) {
+        System.out.println("[AVISO] Retornando lista vazia para: " + descricao);
+        return new ArrayList<>();
     }
 }

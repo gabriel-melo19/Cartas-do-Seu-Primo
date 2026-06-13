@@ -137,24 +137,4 @@ public class CardNode extends StackPane {
 
         labelAtributos.setText(texto);
     }
-
-    public Label getLabelNome() {
-        return labelNome;
-    }
-
-    public Label getLabelAtributos() {
-        return labelAtributos;
-    }
-
-    public Label getLabelSelo() {
-        return labelSelo;
-    }
-
-    public ImageView getImagemView() {
-        return imagemView;
-    }
-
-    public StackPane getFaixaNome() {
-        return faixaNome;
-    }
 }

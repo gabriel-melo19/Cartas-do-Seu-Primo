@@ -1,9 +1,0 @@
-package com.cardgame.persistence;
-
-public interface RepositorioJogo {
-
-    public static void main(String[] args) {
-
-    }
-
-}

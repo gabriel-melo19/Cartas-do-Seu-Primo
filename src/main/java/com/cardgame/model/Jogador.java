@@ -86,7 +86,13 @@ public abstract class Jogador {
         if (cartaNoTabuleiro == null) {
             Carta cartaJogada = mao.remove(indiceMao);
             cartaNoTabuleiro = cartaJogada;
+
             cartaJogada.resetarStatus();
+
+            if (cartaJogada.getTipoEfeito() != null) {
+                cartaJogada.aplicarEfeito(null, this, "INICIO_TABULEIRO");
+            }
+
             return JogadaResultado.SUCESSO;
         }
 
@@ -99,12 +105,15 @@ public abstract class Jogador {
             cartaNoTabuleiro = cartaNova;
             cartaNova.resetarStatus();
 
-            this.trocaRealizadaNesteTurno = true;
+            if (cartaNova.getTipoEfeito() != null) {
+                cartaNova.aplicarEfeito(null, this, "INICIO_TABULEIRO");
+            }
 
+            this.trocaRealizadaNesteTurno = true;
             return JogadaResultado.TROCA_REALIZADA;
-        } else {
-            return JogadaResultado.TROCA_JA_USADA;
         }
+
+        return JogadaResultado.TROCA_JA_USADA;
     }
 
     /**
@@ -158,15 +167,6 @@ public abstract class Jogador {
     public int getQuantidadeNaMao() { return mao.size(); }
     public Carta getCartaNohTabuleiro() { return cartaNoTabuleiro; }
     public boolean temCartaNoTabuleiro() { return cartaNoTabuleiro != null; }
-    public boolean isTrocaRealizadaNesteTurno() { return trocaRealizadaNesteTurno; }
-
-    /**
-     * Método auxiliar para verificação de vitória (quantas cartas restam no total).
-     */
-    public int getQuantidadeTotalDeCartas() {
-        int noTabuleiro = cartaNoTabuleiro != null ? 1 : 0;
-        return mao.size() + noTabuleiro;
-    }
 
     @Override
     public boolean equals(Object o) {

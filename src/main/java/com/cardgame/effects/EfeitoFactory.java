@@ -1,6 +1,5 @@
 package com.cardgame.effects;
 
-import com.cardgame.model.Elemento;
 import com.cardgame.model.TipoEfeito;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,6 @@ public class EfeitoFactory {
 
     static {
         MAPEAMENTO_EFEITOS.put(TipoEfeito.ESCUDO_INICIAL, EfeitoEscudoInicial.class);
-        // Adicione novos efeitos conforme necessário
     }
 
     /**
@@ -33,18 +31,9 @@ public class EfeitoFactory {
         }
 
         try {
-            // Construtor padrão para efeitos simples
             return classeEfeito.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new RuntimeException("Erro ao criar efeito: " + tipo, e);
         }
     }
-
-    /**
-     * Cria efeito de escudo inicial com valor específico.
-     */
-    public static EfeitoCarta criarEscudoInicial(int valorEscudo) {
-        return new EfeitoEscudoInicial();
-    }
-
 }

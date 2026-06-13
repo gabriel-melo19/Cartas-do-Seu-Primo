@@ -4,6 +4,9 @@ import com.cardgame.model.Bot;
 
 public class SessaoJogo {
 
+    // Todos os atributos/métodos são estáticos, justamente para serem acessadas globalmente
+    // Essa abordagem teria de ser removida caso usassemos testes unitários
+
     private static String nicknameAtual;
     private static boolean carregandoDeSave;
     private static Bot adversarioAtual;

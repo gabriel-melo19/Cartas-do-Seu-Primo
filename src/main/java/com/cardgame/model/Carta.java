@@ -45,6 +45,7 @@ public class Carta {
     @JsonProperty("temEscudo")
     private boolean temEscudo;
 
+
     public Carta() {
     }
 
@@ -99,22 +100,6 @@ public class Carta {
         this.efeito = efeito;
     }
 
-    /**
-     * Aplica modificador elemental somente ao ataque atual.
-     * NÃO altera a vida atual da carta.
-     */
-    public void aplicarModificadoresElementares(Carta oponente) {
-        if (oponente == null || this.elemento == null || oponente.getElemento() == null) {
-            this.poderDeLutaAtual = this.poderDeLutaBase;
-            return;
-        }
-
-        Elemento eu = this.elemento;
-        Elemento ele = oponente.getElemento();
-
-        double multDano = eu.getMultiplicadorAtaqueContra(ele);
-        this.poderDeLutaAtual = Math.round(this.poderDeLutaBase * (float) multDano);
-    }
 
     public void ativarEscudo() {
         this.temEscudo = true;

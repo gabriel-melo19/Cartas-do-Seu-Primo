@@ -3,8 +3,6 @@ package com.cardgame.model;
 import com.cardgame.logic.SistemaCombate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -193,31 +191,6 @@ public class Bot extends Jogador {
         return pontuacao;
     }
 
-    /**
-     * Gera a lista de prêmios ao ser derrotado.
-     * Regra: Solta 1 ou 2 cartas ALEATÓRIAS da SUA PRÓPRIA MÃO ATUAL.
-     *
-     * @return Lista de cartas que o jogador humano ganhou.
-     */
-    public List<Carta> gerarRecompensa() {
-        List<Carta> premios = new ArrayList<>();
-        List<Carta> maoDispo = new ArrayList<>(getMao());
-
-        if (maoDispo.isEmpty()) {
-            return premios;
-        }
-
-        int qtd = RANDOM.nextBoolean() ? 1 : 2;
-        qtd = Math.min(qtd, maoDispo.size());
-
-        Collections.shuffle(maoDispo, RANDOM);
-
-        for (int i = 0; i < qtd; i++) {
-            premios.add(maoDispo.get(i));
-        }
-
-        return premios;
-    }
 
     public Dificuldade getDificuldade() { return dificuldade; }
     public String getDescricao() { return descricao; }
