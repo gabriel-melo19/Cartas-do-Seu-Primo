@@ -2,22 +2,32 @@
 
 ---
 
+<img src="src/main/resources/com/cardgame/img/Logo.png" width="800" height="800">
+
+
 Um jogo de cartas estratégico offline (Player vs Bot) desenvolvido em Java utilizando JavaFX para a interface gráfica. O projeto é focado na aplicação prática dos fundamentos da Programação Orientada a Objetos (POO), incluindo herança, polimorfismo, encapsulamento, abstração e design patterns como Factory e Strategy.
 
 Utiliza o ecossistema Maven para gerenciamento de dependências e Jackson para persistência de dados localmente (sem banco de dados SQL).
 
+
+
 ---
+
+
 
 ## 📋 Funcionalidades Principais
 
-O jogo oferece uma experiência completa de coleta, construção de deck e combate tático:
-🎮 Modos de Jogo
+### Mecânicas
 
-    Duelos Offline: Combate contra Bots com decks personalizados e comportamentos distintos.
-    Sistema de Turnos: Compra de carta por turno, troca dinâmica no tabuleiro 1x2 e ataque automático ao finalizar o turno.
-    Mecânica de Elementos: Sistema de vantagens e desvantagens entre elementos (ex: Fogo vs Gelo) que modifica atributos temporariamente durante o duelo.
-    Vitória: O jogador vence ao eliminar todas as cartas do oponente; não há vida direta para o personagem/jogador.
+- **Duelos Offline**: Combate contra Bots com decks personalizados e comportamentos distintos.
+- **Sistema de Turnos**: Compra de carta por turno, troca dinâmica no tabuleiro 1x2 e ataque automático ao finalizar o turno.
+- **Mecânica de Elementos**: Sistema de vantagens e desvantagens entre elementos (ex: Fogo vs Gelo) que modifica atributos temporariamente durante o duelo.
+- **Vitória**: O jogador vence ao eliminar todas as cartas do oponente; não há vida direta para o personagem/jogador.
 
+## 📋 Estrutura do Projeto
+
+
+```
 ├── dependency-reduced-pom.xml
 ├── docs
 │   ├── diagramas
@@ -33,7 +43,6 @@ O jogo oferece uma experiência completa de coleta, construção de deck e comba
 ├── pom.xml
 ├── Readme.md
 ├── saves
-│   └── teste.json
 └── src
     └── main
         ├── java
@@ -60,7 +69,6 @@ O jogo oferece uma experiência completa de coleta, construção de deck e comba
         │   │       │   ├── JogadaResultado.java
         │   │       │   ├── JogadorHumano.java
         │   │       │   ├── Jogador.java
-        │   │       │   ├── TabelaElementos.java
         │   │       │   └── TipoEfeito.java
         │   │       ├── persistence
         │   │       │   ├── RepositorioBots.java
@@ -72,7 +80,6 @@ O jogo oferece uma experiência completa de coleta, construção de deck e comba
         │   │           ├── ControladorDeFluxo.java
         │   │           ├── controller
         │   │           │   ├── CarregarSaveController.java
-        │   │           │   ├── DueloController.java
         │   │           │   ├── JanelaBatalhaController.java
         │   │           │   ├── MenuPrincipalController.java
         │   │           │   ├── NicknameController.java
@@ -155,16 +162,26 @@ O jogo oferece uma experiência completa de coleta, construção de deck e comba
                         │   └── yung-lixo.png
                         ├── fundos
                         │   └── fundo_menu.jpg
-                        └── inimigos
-                            ├── batman.png
-                            ├── chapolin.png
-                            ├── deadpool.png
-                            ├── erick_jackan.png
-                            ├── goku.png
-                            ├── johnwick.png
-                            ├── kiko.png
-                            ├── leon_s_kennedy.png
-                            ├── negonei.png
-                            ├── seu_madruga.png
-                            └── vegeta.png
+                        ├── inimigos
+                        │   ├── batman.png
+                        │   ├── chapolin.png
+                        │   ├── deadpool.png
+                        │   ├── erick_jackan.png
+                        │   ├── goku.png
+                        │   ├── johnwick.png
+                        │   ├── kiko.png
+                        │   ├── leon_s_kennedy.png
+                        │   ├── negonei.png
+                        │   ├── seu_madruga.png
+                        │   └── vegeta.png
+                        └── Logo.png
+```
+
+---
+
+## 🤝 Colaboradores
+
+- **Gabriel Melo**
+- **Marcos William**
+- **Wesley Cardozo**
 
