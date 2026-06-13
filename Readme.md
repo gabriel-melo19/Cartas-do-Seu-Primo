@@ -1,4 +1,4 @@
-## Card Game - JavaFX Edition
+## Prompt Cards - JavaFX Edition
 
 ---
 
