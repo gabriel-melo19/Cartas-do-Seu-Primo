@@ -2,6 +2,7 @@ module com.cardgame.cardgame {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+    requires javafx.media;
 
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.annotation;

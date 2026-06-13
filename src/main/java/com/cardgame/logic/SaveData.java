@@ -13,6 +13,9 @@ public class SaveData {
     @JsonProperty("deckIdSelecionado")
     private String deckIdSelecionado;
 
+    @JsonProperty("cartasDoDeckSelecionado")
+    private List<String> cartasDoDeckSelecionado;
+
     @JsonProperty("botsDerrotados")
     private List<String> botsDerrotados;
 
@@ -23,6 +26,7 @@ public class SaveData {
     private String ultimoBotEnfrentado;
 
     public SaveData() {
+        this.cartasDoDeckSelecionado = new ArrayList<>();
         this.botsDerrotados = new ArrayList<>();
         this.cartasGanhas = new ArrayList<>();
         this.ultimoBotEnfrentado = "";
@@ -31,6 +35,7 @@ public class SaveData {
     public SaveData(String nickname, String deckIdSelecionado) {
         this.nickname = nickname;
         this.deckIdSelecionado = deckIdSelecionado;
+        this.cartasDoDeckSelecionado = new ArrayList<>();
         this.botsDerrotados = new ArrayList<>();
         this.cartasGanhas = new ArrayList<>();
         this.ultimoBotEnfrentado = "";
@@ -50,6 +55,16 @@ public class SaveData {
 
     public void setDeckIdSelecionado(String deckIdSelecionado) {
         this.deckIdSelecionado = deckIdSelecionado;
+    }
+
+    public List<String> getCartasDoDeckSelecionado() {
+        return cartasDoDeckSelecionado;
+    }
+
+    public void setCartasDoDeckSelecionado(List<String> cartasDoDeckSelecionado) {
+        this.cartasDoDeckSelecionado = cartasDoDeckSelecionado != null
+                ? new ArrayList<>(cartasDoDeckSelecionado)
+                : new ArrayList<>();
     }
 
     public List<String> getBotsDerrotados() {

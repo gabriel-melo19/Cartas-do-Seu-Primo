@@ -1,12 +1,19 @@
 package com.cardgame.logic;
 
-import com.cardgame.model.*;
-import java.util.ArrayList;
+import com.cardgame.model.Bot;
+import com.cardgame.model.Carta;
+import com.cardgame.model.JogadorHumano;
+
 import java.util.List;
 
 /**
  * Orquestra o fluxo de batalha entre Humano e Bot.
- * Responsável por aplicar regras, calcular dano e determinar vencedor.
+ * Regras:
+ * - Cada lado mantém ou troca sua carta antes do combate.
+ * - A carta antiga volta para a mão com o HP atual, se houver troca.
+ * - O combate é simultâneo: ambas as cartas causam dano no mesmo turno.
+ * - Carta só sai do jogo quando morre.
+ * - O jogo termina quando um lado fica sem cartas na mão e sem carta no tabuleiro.
  */
 public class SistemaCombate {
 
@@ -19,8 +26,8 @@ public class SistemaCombate {
     }
 
     /**
-     * Chamar no início de cada turno do Jogador Humano.
-     * Reseta flags de ambos os jogadores.
+     * Chamar no início de cada turno do jogador humano.
+     * Reseta a possibilidade de troca para ambos.
      */
     public void inicioDoTurnoHumano() {
         humano.iniciarNovoTurno();
@@ -28,76 +35,162 @@ public class SistemaCombate {
     }
 
     /**
-     * Executa a ação principal de "Passar Turno".
-     * Fluxo:
-     * 1. Humano já escolheu carta (feito antes de chamar este método).
-     * 2. Verifica se Bot precisa jogar carta (se estiver sem carta no tabuleiro).
-     * 3. Aplica modificadores elementares (Fortes/Fracos).
-     * 4. Resolve combate simultâneo (Ambos atacam).
-     * 5. Remove cartas mortas.
-     * 6. Verifica condição de vitória/derrota.
-     * 7. Se venceu, gera recompensa.
+     * Resolve o turno completo:
+     * 1. Bot decide se mantém ou troca carta.
+     * 2. Se alguém ficou sem cartas, verifica fim de jogo.
+     * 3. Se ambos têm carta no campo, resolve combate simultâneo.
+     * 4. Remove cartas mortas.
+     * 5. Verifica vitória/derrota.
      */
     public DueloResultado passarTurno() {
         DueloResultado resultado = new DueloResultado();
+        resultado.vitoria = false;
+        resultado.valorDinheiro = 0;
+        resultado.batalhouComSucesso = false;
 
-        if (!bot.temCartaNoTabuleiro()) {
-            bot.executarAcoesDoTurno(humano, this);
-        }
+        bot.executarAcoesDoTurno(humano, this);
 
         if (humano.perdeuTudo() || bot.perdeuTudo()) {
             verificarVitoria(resultado);
             return resultado;
         }
 
-        if (humano.temCartaNoTabuleiro() && bot.temCartaNoTabuleiro()) {
-            Carta cartaH = humano.getCartaNohTabuleiro();
-            Carta cartaB = bot.getCartaNohTabuleiro();
+        if (!humano.temCartaNoTabuleiro() && !bot.temCartaNoTabuleiro()) {
+            resultado.mensagem = "Nenhuma carta em campo.";
+            verificarVitoria(resultado);
+            return resultado;
+        }
 
-            cartaH.aplicarModificadoresElementares(cartaB);
-            cartaB.aplicarModificadoresElementares(cartaH);
+        if (!humano.temCartaNoTabuleiro()) {
+            resultado.mensagem = "Você está sem carta no tabuleiro.";
+            verificarVitoria(resultado);
+            return resultado;
+        }
 
-            int danoParaBot = cartaH.getPoderDeLutaAtual();
-            int danoParaHumano = cartaB.getPoderDeLutaAtual();
+        if (!bot.temCartaNoTabuleiro()) {
+            resultado.mensagem = "O bot está sem carta no tabuleiro.";
+            verificarVitoria(resultado);
+            return resultado;
+        }
 
-            boolean botMorreu = humano.receberDano(danoParaBot);
-            boolean humanoMorreu = bot.receberDano(danoParaHumano);
+        Carta cartaHumano = humano.getCartaNohTabuleiro();
+        Carta cartaBot = bot.getCartaNohTabuleiro();
 
-            if (botMorreu || humanoMorreu) {
-                resultado.batalhouComSucesso = true;
+        int danoParaBot = calcularDano(cartaHumano, cartaBot);
+        int danoParaHumano = calcularDano(cartaBot, cartaHumano);
+
+        boolean botMorreu = bot.receberDano(danoParaBot);
+        boolean humanoMorreu = humano.receberDano(danoParaHumano);
+
+        resultado.batalhouComSucesso = true;
+        resultado.mensagem = construirMensagemCombate(
+                cartaHumano,
+                cartaBot,
+                danoParaBot,
+                danoParaHumano,
+                botMorreu,
+                humanoMorreu
+        );
+
+        verificarVitoria(resultado);
+
+        if (!humano.perdeuTudo() && !bot.perdeuTudo()) {
+            if (resultado.mensagem == null || resultado.mensagem.isBlank()) {
+                resultado.mensagem = "Combate concluído. Próximo turno.";
             }
         }
 
-        // --- FASE 4: VERIFICAÇÃO DE RESULTADO ---
-        verificarVitoria(resultado);
-
         return resultado;
+    }
+
+    /**
+     * Calcula o dano de uma carta atacante sobre uma defensora.
+     * Usa o ATK atual e aplica um bônus/penalidade simples por elemento.
+     */
+    private int calcularDano(Carta atacante, Carta defensora) {
+        if (atacante == null) {
+            return 0;
+        }
+
+        int dano = atacante.getPoderDeLutaAtual();
+
+        if (defensora != null
+                && atacante.getElemento() != null
+                && defensora.getElemento() != null) {
+
+            if (atacante.getElemento().ehForteContra(defensora.getElemento())) {
+                dano += 10;
+            } else if (atacante.getElemento().ehFracoContra(defensora.getElemento())) {
+                dano -= 10;
+            }
+        }
+
+        return Math.max(dano, 0);
+    }
+
+    private String construirMensagemCombate(
+            Carta cartaHumanoAntes,
+            Carta cartaBotAntes,
+            int danoParaBot,
+            int danoParaHumano,
+            boolean botMorreu,
+            boolean humanoMorreu
+    ) {
+        String nomeHumano = cartaHumanoAntes != null ? cartaHumanoAntes.getNome() : "Sua carta";
+        String nomeBot = cartaBotAntes != null ? cartaBotAntes.getNome() : "Carta do bot";
+
+        if (humanoMorreu && botMorreu) {
+            return nomeHumano + " e " + nomeBot + " foram derrotadas no combate.";
+        }
+
+        if (botMorreu) {
+            return nomeHumano + " causou " + danoParaBot + " de dano e derrotou " + nomeBot + ".";
+        }
+
+        if (humanoMorreu) {
+            return nomeBot + " causou " + danoParaHumano + " de dano e derrotou " + nomeHumano + ".";
+        }
+
+        return nomeHumano + " causou " + danoParaBot + " e recebeu " + danoParaHumano + " de dano.";
     }
 
     /**
      * Verifica quem venceu e prepara a recompensa.
      */
     private void verificarVitoria(DueloResultado resultado) {
+        if (humano.perdeuTudo() && bot.perdeuTudo()) {
+            resultado.vitoria = false;
+            resultado.valorDinheiro = 0;
+            resultado.mensagem = "As duas equipes ficaram sem cartas. Empate.";
+            return;
+        }
+
         if (humano.perdeuTudo()) {
             resultado.vitoria = false;
+            resultado.valorDinheiro = 0;
             resultado.mensagem = "Você ficou sem cartas! Derrota.";
-        } else if (bot.perdeuTudo()) {
+            return;
+        }
+
+        if (bot.perdeuTudo()) {
             resultado.vitoria = true;
             resultado.mensagem = "Vitória! Oponente sem cartas.";
-
             resultado.valorDinheiro = 50 * bot.getDificuldade().getNivel();
 
             List<Carta> cartasGanhas = bot.gerarRecompensa();
+            resultado.cartasGanhas.clear();
             resultado.cartasGanhas.addAll(cartasGanhas);
 
-            for (Carta c : cartasGanhas) {
-                humano.adicionarCartaPremio(c);
+            for (Carta carta : cartasGanhas) {
+                humano.adicionarCartaPremio(carta);
             }
-        } else {
-            resultado.vitoria = false; // Jogo continua
+            return;
+        }
+
+        resultado.vitoria = false;
+        resultado.valorDinheiro = 0;
+        if (resultado.mensagem == null || resultado.mensagem.isBlank()) {
             resultado.mensagem = "Combate concluído. Próximo turno.";
-            resultado.valorDinheiro = 0;
         }
     }
 }
-

@@ -1,10 +1,12 @@
 package com.cardgame.ui.controller;
 
+import com.cardgame.logic.SaveData;
 import com.cardgame.logic.SessaoJogo;
 import com.cardgame.model.Bot;
 import com.cardgame.persistence.RepositorioBots;
 import com.cardgame.ui.ControladorDeFluxo;
 import com.cardgame.ui.ScreenManager;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -18,15 +20,21 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SelecaoAdversarioController implements ControladorDeFluxo {
 
     private static final int DURACAO_FADE_MS = 400;
     private static final String ESTILO_CARD = "card-adversario";
     private static final String ESTILO_CARD_SELECIONADO = "card-adversario-selecionado";
+    private static final String CAMINHO_TELA_BATALHA = "/com/cardgame/fxml/janela_batalha.fxml";
+    private static final String CAMINHO_TELA_CARREGAR_SAVE = "/com/cardgame/fxml/menu_carregar_save.fxml";
+    private static final String CAMINHO_TELA_SELECAO_DECK = "/com/cardgame/fxml/selecao_deck.fxml";
 
     @FXML private VBox containerPrincipal;
     @FXML private ScrollPane scrollAdversarios;
@@ -44,19 +52,21 @@ public class SelecaoAdversarioController implements ControladorDeFluxo {
 
     private final List<Bot> botsDisponiveis = new ArrayList<>();
     private final List<VBox> cardsCriados = new ArrayList<>();
+    private final Set<String> botsDerrotados = new HashSet<>();
 
     private ScreenManager screenManager;
     private Bot botSelecionado;
     private VBox cardSelecionado;
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         if (containerPrincipal != null) {
             containerPrincipal.setOpacity(0.0);
         }
 
         ocultarPainelSelecionado();
         carregarBots();
+        carregarBotsDerrotadosDoSave();
         renderizarBots();
 
         if (!botsDisponiveis.isEmpty() && !cardsCriados.isEmpty()) {
@@ -68,10 +78,15 @@ public class SelecaoAdversarioController implements ControladorDeFluxo {
     public void configurar(ScreenManager screenManager) {
         this.screenManager = screenManager;
 
-        FadeTransition fade = new FadeTransition(Duration.millis(DURACAO_FADE_MS), containerPrincipal);
-        fade.setFromValue(0.0);
-        fade.setToValue(1.0);
-        fade.play();
+        if (containerPrincipal != null) {
+            FadeTransition fade = new FadeTransition(
+                    Duration.millis(DURACAO_FADE_MS),
+                    containerPrincipal
+            );
+            fade.setFromValue(0.0);
+            fade.setToValue(1.0);
+            fade.play();
+        }
     }
 
     private void carregarBots() {
@@ -79,7 +94,37 @@ public class SelecaoAdversarioController implements ControladorDeFluxo {
         botsDisponiveis.addAll(RepositorioBots.listarBots());
     }
 
+    private void carregarBotsDerrotadosDoSave() {
+        botsDerrotados.clear();
+
+        String nickname = SessaoJogo.getNicknameAtual();
+        if (nickname == null || nickname.isBlank()) {
+            return;
+        }
+
+        try {
+            File arquivoSave = new File("saves/" + nickname + ".json");
+            if (!arquivoSave.exists()) {
+                return;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            SaveData saveData = mapper.readValue(arquivoSave, SaveData.class);
+
+            if (saveData.getBotsDerrotados() != null) {
+                botsDerrotados.addAll(saveData.getBotsDerrotados());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void renderizarBots() {
+        if (painelListaAdversarios == null) {
+            return;
+        }
+
         painelListaAdversarios.getChildren().clear();
         cardsCriados.clear();
 
@@ -103,6 +148,14 @@ public class SelecaoAdversarioController implements ControladorDeFluxo {
         nome.setWrapText(true);
 
         card.getChildren().addAll(imagem, nome);
+
+        if (botFoiDerrotado(bot)) {
+            Label derrotado = new Label("DERROTADO");
+            derrotado.getStyleClass().add("status-carta-campo");
+            card.getChildren().add(derrotado);
+            card.setOpacity(0.75);
+        }
+
         card.setOnMouseClicked(event -> selecionarAdversario(bot, card));
 
         return card;
@@ -153,7 +206,8 @@ public class SelecaoAdversarioController implements ControladorDeFluxo {
 
         cardSelecionado = novoCard;
 
-        if (cardSelecionado != null && !cardSelecionado.getStyleClass().contains(ESTILO_CARD_SELECIONADO)) {
+        if (cardSelecionado != null
+                && !cardSelecionado.getStyleClass().contains(ESTILO_CARD_SELECIONADO)) {
             cardSelecionado.getStyleClass().add(ESTILO_CARD_SELECIONADO);
         }
     }
@@ -164,16 +218,40 @@ public class SelecaoAdversarioController implements ControladorDeFluxo {
             return;
         }
 
-        nomeAdversarioSelecionado.setText(bot.getNome());
-        dificuldadeAdversarioSelecionado.setText(formatarDificuldade(bot.getDificuldade()));
-        descricaoAdversarioSelecionado.setText(bot.getDescricao());
+        if (nomeAdversarioSelecionado != null) {
+            String nome = bot.getNome();
 
-        Image imagem = carregarImagemBot(bot);
-        imagemAdversarioSelecionado.setImage(imagem);
-        imagemAdversarioSelecionado.setOpacity(imagem != null ? 1.0 : 0.18);
+            if (botFoiDerrotado(bot)) {
+                nome += " (Derrotado)";
+            }
 
-        painelAdversarioSelecionado.setManaged(true);
-        painelAdversarioSelecionado.setVisible(true);
+            nomeAdversarioSelecionado.setText(nome);
+        }
+
+        if (dificuldadeAdversarioSelecionado != null) {
+            dificuldadeAdversarioSelecionado.setText(formatarDificuldade(bot.getDificuldade()));
+        }
+
+        if (descricaoAdversarioSelecionado != null) {
+            String descricao = bot.getDescricao();
+
+            if (botFoiDerrotado(bot)) {
+                descricao = descricao + "\n\nEste adversário já foi derrotado.";
+            }
+
+            descricaoAdversarioSelecionado.setText(descricao);
+        }
+
+        if (imagemAdversarioSelecionado != null) {
+            Image imagem = carregarImagemBot(bot);
+            imagemAdversarioSelecionado.setImage(imagem);
+            imagemAdversarioSelecionado.setOpacity(imagem != null ? 1.0 : 0.18);
+        }
+
+        if (painelAdversarioSelecionado != null) {
+            painelAdversarioSelecionado.setManaged(true);
+            painelAdversarioSelecionado.setVisible(true);
+        }
     }
 
     private void ocultarPainelSelecionado() {
@@ -183,7 +261,17 @@ public class SelecaoAdversarioController implements ControladorDeFluxo {
         }
     }
 
+    private boolean botFoiDerrotado(Bot bot) {
+        return bot != null
+                && bot.getId() != null
+                && botsDerrotados.contains(bot.getId());
+    }
+
     private String formatarDificuldade(Bot.Dificuldade dificuldade) {
+        if (dificuldade == null) {
+            return "Desconhecida";
+        }
+
         return switch (dificuldade) {
             case FACIL -> "Fácil";
             case MEDIO -> "Normal";
@@ -192,25 +280,34 @@ public class SelecaoAdversarioController implements ControladorDeFluxo {
     }
 
     @FXML
-    public void iniciarPartida() {
+    private void iniciarPartida() {
         if (botSelecionado == null) {
             System.out.println("[ADVERSARIO] Nenhum adversário foi selecionado.");
             return;
         }
 
+        if (screenManager == null) {
+            System.out.println("[ERRO] ScreenManager não foi configurado na seleção de adversário.");
+            return;
+        }
+
+        SessaoJogo.definirAdversarioAtual(botSelecionado);
         System.out.println("[ADVERSARIO] Partida iniciada contra: " + botSelecionado.getNome());
+
+        screenManager.navegarPara(CAMINHO_TELA_BATALHA);
     }
 
     @FXML
-    public void voltarParaSelecaoDeck() {
+    private void voltarParaSelecaoDeck() {
         if (screenManager == null) {
+            System.out.println("[ERRO] ScreenManager não foi configurado na seleção de adversário.");
             return;
         }
 
         if (SessaoJogo.isCarregandoDeSave()) {
-            screenManager.navegarPara("/com/cardgame/fxml/menu_carregar_save.fxml");
+            screenManager.navegarPara(CAMINHO_TELA_CARREGAR_SAVE);
         } else {
-            screenManager.navegarPara("/com/cardgame/fxml/selecao_deck.fxml");
+            screenManager.navegarPara(CAMINHO_TELA_SELECAO_DECK);
         }
     }
 }

@@ -2,11 +2,12 @@ package com.cardgame.model;
 
 import com.cardgame.logic.SistemaCombate;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * Representa um oponente controlado por IA.
@@ -50,60 +51,146 @@ public class Bot extends Jogador {
     public void executarAcoesDoTurno(Jogador oponente, SistemaCombate sistemaCombate) {
         iniciarNovoTurno();
 
-        if (temCartaNoTabuleiro()) {
+        List<Carta> maoAtual = getMao();
+        if (maoAtual.isEmpty() && !temCartaNoTabuleiro()) {
             return;
         }
 
-        if (!getMao().isEmpty()) {
-            int indiceEscolhido = escolherMelhorCarta(oponente);
-            jogarNoTabuleiro(indiceEscolhido);
+        if (!temCartaNoTabuleiro()) {
+            if (!maoAtual.isEmpty()) {
+                int indiceEscolhido = escolherMelhorCarta(oponente);
+                jogarNoTabuleiro(indiceEscolhido);
+            }
+            return;
+        }
+
+        if (maoAtual.isEmpty()) {
+            return;
+        }
+
+        int indiceMelhorDaMao = escolherMelhorCarta(oponente);
+        Carta cartaAtualCampo = getCartaNohTabuleiro();
+        Carta melhorCartaDaMao = maoAtual.get(indiceMelhorDaMao);
+
+        if (deveTrocarCarta(cartaAtualCampo, melhorCartaDaMao, oponente)) {
+            jogarNoTabuleiro(indiceMelhorDaMao);
         }
     }
 
     /**
      * Decide qual carta jogar baseado na dificuldade.
-     * Foco: Vantagem elemental (Difícil) ou poder bruto (Médio) ou Aleatório (Fácil).
+     * Foco: aleatoriedade (Fácil), poder bruto (Médio) ou heurística de confronto (Difícil).
      */
     private int escolherMelhorCarta(Jogador oponente) {
-        Carta cartaOponente = oponente.getCartaNohTabuleiro();
         List<Carta> mao = getMao();
+        Carta cartaOponente = oponente != null ? oponente.getCartaNohTabuleiro() : null;
+
+        if (mao.isEmpty()) {
+            return 0;
+        }
 
         switch (dificuldade) {
             case FACIL:
                 return RANDOM.nextInt(mao.size());
 
             case MEDIO:
-                return encontrarIndiceMaiorAtaque(mao);
+                return encontrarIndiceMelhorPontuacaoSimples(mao);
 
             case DIFICIL:
-                if (cartaOponente == null) {
-                    return encontrarIndiceMaiorAtaque(mao);
-                }
-
-                for (int i = 0; i < mao.size(); i++) {
-                    Carta c = mao.get(i);
-                    if (c.getElemento().ehForteContra(cartaOponente.getElemento())) {
-                        return i;
-                    }
-                }
-                return encontrarIndiceMaiorAtaque(mao);
+                return encontrarIndiceMelhorPontuacaoContraOponente(mao, cartaOponente);
 
             default:
                 return 0;
         }
     }
 
-    private int encontrarIndiceMaiorAtaque(List<Carta> mao) {
+    private boolean deveTrocarCarta(Carta cartaAtualCampo, Carta melhorCartaDaMao, Jogador oponente) {
+        if (cartaAtualCampo == null || melhorCartaDaMao == null) {
+            return false;
+        }
+
+        Carta cartaOponente = oponente != null ? oponente.getCartaNohTabuleiro() : null;
+
+        switch (dificuldade) {
+            case FACIL:
+                return cartaAtualCampo.getVidaAtual() <= 20 && RANDOM.nextBoolean();
+
+            case MEDIO:
+                return melhorCartaDaMao.getPoderDeLutaAtual() > cartaAtualCampo.getPoderDeLutaAtual()
+                        && melhorCartaDaMao.getVidaAtual() >= cartaAtualCampo.getVidaAtual();
+
+            case DIFICIL:
+                int pontuacaoAtual = calcularPontuacaoCarta(cartaAtualCampo, cartaOponente);
+                int pontuacaoNova = calcularPontuacaoCarta(melhorCartaDaMao, cartaOponente);
+
+                if (cartaAtualCampo.getVidaAtual() <= 15 && melhorCartaDaMao.getVidaAtual() > cartaAtualCampo.getVidaAtual()) {
+                    return true;
+                }
+
+                return pontuacaoNova > pontuacaoAtual + 8;
+
+            default:
+                return false;
+        }
+    }
+
+    private int encontrarIndiceMelhorPontuacaoSimples(List<Carta> mao) {
         int indiceMelhor = 0;
-        int maiorAtaque = -1;
+        int melhorPontuacao = Integer.MIN_VALUE;
 
         for (int i = 0; i < mao.size(); i++) {
-            if (mao.get(i).getPoderDeLutaBase() > maiorAtaque) {
-                maiorAtaque = mao.get(i).getPoderDeLutaBase();
+            Carta carta = mao.get(i);
+            int pontuacao = carta.getPoderDeLutaAtual() + carta.getVidaAtual();
+
+            if (pontuacao > melhorPontuacao) {
+                melhorPontuacao = pontuacao;
                 indiceMelhor = i;
             }
         }
+
         return indiceMelhor;
+    }
+
+    private int encontrarIndiceMelhorPontuacaoContraOponente(List<Carta> mao, Carta cartaOponente) {
+        int indiceMelhor = 0;
+        int melhorPontuacao = Integer.MIN_VALUE;
+
+        for (int i = 0; i < mao.size(); i++) {
+            Carta carta = mao.get(i);
+            int pontuacao = calcularPontuacaoCarta(carta, cartaOponente);
+
+            if (pontuacao > melhorPontuacao) {
+                melhorPontuacao = pontuacao;
+                indiceMelhor = i;
+            }
+        }
+
+        return indiceMelhor;
+    }
+
+    private int calcularPontuacaoCarta(Carta carta, Carta cartaOponente) {
+        if (carta == null) {
+            return Integer.MIN_VALUE;
+        }
+
+        int pontuacao = 0;
+
+        pontuacao += carta.getPoderDeLutaAtual() * 2;
+        pontuacao += carta.getVidaAtual();
+
+        if (cartaOponente != null && carta.getElemento() != null && cartaOponente.getElemento() != null) {
+            if (carta.getElemento().ehForteContra(cartaOponente.getElemento())) {
+                pontuacao += 25;
+            } else if (carta.getElemento().ehFracoContra(cartaOponente.getElemento())) {
+                pontuacao -= 18;
+            }
+        }
+
+        if (carta.getVidaAtual() <= 15) {
+            pontuacao -= 20;
+        }
+
+        return pontuacao;
     }
 
     /**
@@ -114,14 +201,13 @@ public class Bot extends Jogador {
      */
     public List<Carta> gerarRecompensa() {
         List<Carta> premios = new ArrayList<>();
-        List<Carta> maoDispo = getMao();
+        List<Carta> maoDispo = new ArrayList<>(getMao());
 
         if (maoDispo.isEmpty()) {
             return premios;
         }
 
-        int qtd = (RANDOM.nextBoolean()) ? 1 : 2;
-
+        int qtd = RANDOM.nextBoolean() ? 1 : 2;
         qtd = Math.min(qtd, maoDispo.size());
 
         Collections.shuffle(maoDispo, RANDOM);

@@ -1,6 +1,7 @@
 {
-  "nickname" : "player",
+  "nickname" : "Caça rato",
   "deckIdSelecionado" : "DECK_1",
+  "cartasDoDeckSelecionado" : [ "2", "6", "14", "16", "5" ],
   "botsDerrotados" : [ ],
   "cartasGanhas" : [ ],
   "ultimoBotEnfrentado" : ""

@@ -1,6 +1,7 @@
 {
-  "nickname" : "Messi Careca",
+  "nickname" : "dsabjjacksc",
   "deckIdSelecionado" : "DECK_1",
+  "cartasDoDeckSelecionado" : [ "8", "1", "16", "14", "12" ],
   "botsDerrotados" : [ ],
   "cartasGanhas" : [ ],
   "ultimoBotEnfrentado" : ""

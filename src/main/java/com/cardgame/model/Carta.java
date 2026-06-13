@@ -1,8 +1,9 @@
 package com.cardgame.model;
 
+import com.cardgame.effects.EfeitoCarta;
+import com.cardgame.effects.EfeitoFactory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.cardgame.effects.EfeitoCarta;
 
 import java.util.Objects;
 
@@ -35,11 +36,9 @@ public class Carta {
     @JsonProperty("vidaAtual")
     private int vidaAtual;
 
-    //VEM DO JSON
     @JsonProperty("tipoEfeito")
     private TipoEfeito tipoEfeito;
 
-    //NÃO VAI PRO JSON
     @JsonIgnore
     private transient EfeitoCarta efeito;
 
@@ -65,36 +64,57 @@ public class Carta {
         this.temEscudo = false;
     }
 
+    public Carta(Carta outra) {
+        this.id = outra.id;
+        this.nome = outra.nome;
+        this.imagem = outra.imagem;
+        this.descricao = outra.descricao;
+        this.elemento = outra.elemento;
+        this.poderDeLutaBase = outra.poderDeLutaBase;
+        this.poderDeLutaAtual = outra.poderDeLutaBase;
+        this.vidaBase = outra.vidaBase;
+        this.vidaAtual = outra.vidaBase;
+        this.tipoEfeito = outra.tipoEfeito;
+        this.temEscudo = false;
+
+        if (this.tipoEfeito != null) {
+            this.efeito = EfeitoFactory.criarEfeito(this.tipoEfeito, null);
+        }
+    }
+
     public String getId() { return id; }
     public String getNome() { return nome; }
     public String getImagem() { return imagem; }
     public String getDescricao() { return descricao; }
     public Elemento getElemento() { return elemento; }
     public int getPoderDeLutaBase() { return poderDeLutaBase; }
-    public int getPoderDeLutaAtual() {return poderDeLutaAtual; }
+    public int getPoderDeLutaAtual() { return poderDeLutaAtual; }
     public int getVidaBase() { return vidaBase; }
     public int getVidaAtual() { return vidaAtual; }
     public TipoEfeito getTipoEfeito() { return tipoEfeito; }
     public EfeitoCarta getEfeito() { return efeito; }
     public boolean temEscudo() { return temEscudo; }
+
     public void setEfeito(EfeitoCarta efeito) {
         this.efeito = efeito;
     }
 
-
+    /**
+     * Aplica modificador elemental somente ao ataque atual.
+     * NÃO altera a vida atual da carta.
+     */
     public void aplicarModificadoresElementares(Carta oponente) {
-        if (oponente == null) return;
+        if (oponente == null || this.elemento == null || oponente.getElemento() == null) {
+            this.poderDeLutaAtual = this.poderDeLutaBase;
+            return;
+        }
 
         Elemento eu = this.elemento;
         Elemento ele = oponente.getElemento();
 
         double multDano = eu.getMultiplicadorAtaqueContra(ele);
-        double multVida = eu.getMultiplicadorVidaQuandoConfrontado(ele);
-
         this.poderDeLutaAtual = Math.round(this.poderDeLutaBase * (float) multDano);
-        this.vidaAtual = Math.round(this.vidaBase * (float) multVida);
     }
-
 
     public void ativarEscudo() {
         this.temEscudo = true;
@@ -104,17 +124,21 @@ public class Carta {
         this.temEscudo = false;
     }
 
+    /**
+     * Retorna true se a carta morreu.
+     */
     public boolean receberDano(int dano) {
         if (dano <= 0) return false;
 
         if (this.temEscudo) {
             this.removerEscudo();
-            return true;
+            return false;
         }
 
         this.vidaAtual -= dano;
         if (this.vidaAtual < 0) this.vidaAtual = 0;
-        return false;
+
+        return this.vidaAtual <= 0;
     }
 
     public void aplicarEfeito(Jogador oponente, Jogador proprietario, String fase) {
@@ -127,9 +151,13 @@ public class Carta {
         return this.efeito != null;
     }
 
+    /**
+     * Reseta apenas atributos temporários de combate.
+     * NÃO cura a carta.
+     */
     public void resetarStatus() {
-        this.vidaAtual = this.vidaBase;
         this.poderDeLutaAtual = this.poderDeLutaBase;
+        this.temEscudo = false;
     }
 
     @Override
@@ -139,7 +167,7 @@ public class Carta {
 
         return String.format("%s[%s] %s | ATK: %d | HP: %d | %s",
                 escudoStr, this.nome, this.elemento,
-                this.poderDeLutaBase, this.vidaAtual, efeitoStr);
+                this.poderDeLutaAtual, this.vidaAtual, efeitoStr);
     }
 
     @Override

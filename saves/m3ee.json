@@ -1,6 +1,7 @@
 {
-  "nickname" : "asdf",
+  "nickname" : "m3ee",
   "deckIdSelecionado" : "DECK_1",
+  "cartasDoDeckSelecionado" : [ "15", "12", "1", "7", "11" ],
   "botsDerrotados" : [ ],
   "cartasGanhas" : [ ],
   "ultimoBotEnfrentado" : ""

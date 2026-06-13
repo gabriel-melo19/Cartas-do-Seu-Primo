@@ -56,6 +56,10 @@ public class ScreenManager extends StackPane {
             removerTelaDoTopo();
             getChildren().add(novaTela);
 
+            if (novaTela instanceof javafx.scene.Parent parent) {
+                AudioManager.aplicarSomInterativo(parent);
+            }
+
         } catch (IOException e) {
             System.err.println("[ERRO] Falha ao carregar tela: " + caminhoFxml + " — " + e.getMessage());
         }

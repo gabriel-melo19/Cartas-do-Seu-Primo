@@ -150,10 +150,10 @@ public abstract class Jogador {
         }
     }
 
-
     public String getId() { return id; }
     public String getNome() { return nome; }
     public List<Carta> getColecao() { return new ArrayList<>(colecao); }
+    public Deck getDeckReferencia() { return deckReferencia; }
     public List<Carta> getMao() { return new ArrayList<>(mao); }
     public int getQuantidadeNaMao() { return mao.size(); }
     public Carta getCartaNohTabuleiro() { return cartaNoTabuleiro; }

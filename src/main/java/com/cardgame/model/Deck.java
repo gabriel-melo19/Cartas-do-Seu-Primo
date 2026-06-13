@@ -56,6 +56,16 @@ public class Deck {
         return cartas.contains(carta);
     }
 
+    public Deck criarCopiaParaPartida() {
+        List<Carta> cartasCopiadas = new ArrayList<>();
+
+        for (Carta carta : this.cartas) {
+            cartasCopiadas.add(new Carta(carta));
+        }
+
+        return new Deck(this.id, this.nome, this.descricao, cartasCopiadas);
+    }
+
     @Override
     public String toString() {
         return "Deck{" +

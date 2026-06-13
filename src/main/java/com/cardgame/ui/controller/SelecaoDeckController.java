@@ -27,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SelecaoDeckController implements ControladorDeFluxo {
@@ -286,6 +287,8 @@ public class SelecaoDeckController implements ControladorDeFluxo {
             saveExistente.setDeckIdSelecionado(deckSelecionadoAtual.getId());
         }
 
+        saveExistente.setCartasDoDeckSelecionado(extrairIdsDasCartas(deckSelecionadoAtual));
+
         RepositorioSave.salvar(saveExistente);
 
         System.out.println("[DECK] Deck confirmado: " + deckSelecionadoAtual.getNome());
@@ -294,6 +297,22 @@ public class SelecaoDeckController implements ControladorDeFluxo {
         if (screenManager != null) {
             screenManager.navegarPara("/com/cardgame/fxml/selecao_adversario.fxml");
         }
+    }
+
+    private List<String> extrairIdsDasCartas(Deck deck) {
+        List<String> ids = new ArrayList<>();
+
+        if (deck == null || deck.getCartas() == null) {
+            return ids;
+        }
+
+        for (Carta carta : deck.getCartas()) {
+            if (carta != null && carta.getId() != null && !carta.getId().isBlank()) {
+                ids.add(carta.getId());
+            }
+        }
+
+        return ids;
     }
 
     private String obterNicknameAtual() {
