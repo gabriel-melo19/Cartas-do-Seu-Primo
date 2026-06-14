@@ -144,7 +144,7 @@ Certifique-se de que esteja usando Java 21 ou superior!
 Abra o terminal/prompt de comando em qualquer lugar e clone o repositório
 
 ```
-git clone https://github.com/WashiiApp/Washii.git
+git clone https://github.com/gabriel-melo19/Prompt-Cards.git
 ```
 
 Para abrir a pasta:
