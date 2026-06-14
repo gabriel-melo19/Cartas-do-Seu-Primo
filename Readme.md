@@ -141,7 +141,7 @@ Utiliza o ecossistema Maven para gerenciamento de dependências e Jackson para p
 
 Certifique-se de que esteja usando Java 21 ou superior!
 
-Abra o terminal/prompt de comando em qualquer lugar e clone o repositório
+Abra o terminal/prompt de comando em qualquer lugar e cole o comando abaixo:
 
 ```
 git clone https://github.com/gabriel-melo19/Prompt-Cards.git
