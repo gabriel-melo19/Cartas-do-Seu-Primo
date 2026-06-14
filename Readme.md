@@ -154,6 +154,8 @@ cd Prompt-Cards
 
 ## 👾 Como jogar
 
+Ainda no terminal/prompt de comando:
+
 ```
 java -jar card-game-1.0-SNAPSHOT.jar
 ```
