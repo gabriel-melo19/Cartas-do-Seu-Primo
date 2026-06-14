@@ -28,15 +28,15 @@ public class MontadorDeck {
         }
 
         String[] nomesDecks = {
-                "Deck Neymar",
-                "Deck Pelé",
-                "Deck Ronaldo"
+                "Deck Gitas Inertes",
+                "Deck Tipos de Carinhas",
+                "Deck Crônicamente Conectado"
         };
 
         String[] descricoes = {
-                "Um deck imprevisível e ofensivo.",
-                "Um deck clássico e equilibrado.",
-                "Um deck forte para pressão constante."
+                "Às vezes você me pergunta por que é que eu sou tão calado.",
+                "Uns são bons e outros não.",
+                "Doente de dados."
         };
 
         for (int i = 0; i < QUANTIDADE_DECKS; i++) {
