@@ -139,6 +139,8 @@ Utiliza o ecossistema Maven para gerenciamento de dependências e Jackson para p
 
 ## 📦 Instalando Prompt Cards
 
+Certifique-se de que esteja usando Java 21 ou superior!
+
 Abra o terminal/prompt de comando em qualquer lugar e clone o repositório
 
 ```
