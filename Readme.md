@@ -45,8 +45,8 @@ Utiliza o ecossistema Maven para gerenciamento de dependências e Jackson para p
 
 ```
 ├── card-game-1.0-SNAPSHOT.jar
-├── docs
-│   └── manual.md
+├── doc
+│   └── guia.pdf
 ├── .gitignore
 ├── .mvn
 │   └── wrapper
