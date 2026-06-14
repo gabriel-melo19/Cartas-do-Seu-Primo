@@ -24,16 +24,29 @@ Utiliza o ecossistema Maven para gerenciamento de dependências e Jackson para p
 - **Mecânica de Elementos**: Sistema de vantagens e desvantagens entre elementos (ex: Fogo vs Gelo) que modifica atributos temporariamente durante o duelo.
 - **Vitória**: O jogador vence ao eliminar todas as cartas do oponente; não há vida direta para o personagem/jogador.
 
-## 📋 Estrutura do Projeto
+### Padrões de Projetos
+
+- **Factory Pattern (EfeitoFactory.java)**: Cria instâncias de `EfeitoCarta` dinamicamente baseadas no `TipoEfeito`. Evitando muitos `if/else`;
+  
+- **Strategy Pattern (EfeitoCarta + Interface + Implementações)**: O efeito da carta é uma estratégia intercambiável. A decisão do Bot (Fácil/Médio/Difícil) também muda a estratégia de jogo sem alterar a classe `Bot`, permitindo trocar algoritmos (efeitos, comportamento de IA) em tempo de execução;
+  
+- **Singleton (SessaoJogo.java)**: Uso de variáveis `static` privadas e construtor privado (`private SessaoJogo()`), garante que apenas uma sessão de jogo exista globalmente, permitindo centralização do estado global;
+  
+- **Builder (MontadorDeck.java + objetos complexos)**: A lógica de `montarDecksPadrao` separa a construção da estrutura dos dados;
+  
+- **Observer Pattern (CarregarSaveController.initialize())**: O botão `carregar` reage automaticamente à mudança de seleção. Padrão Observer nativo do JavaFX;
+  
+- **Command Pattern (JogadaResultado + jogarNoTabuleiro)**: Ações são encapsuladas em retornos de objetos de resultado.
+
+---
+
+## 📁 Estrutura do Projeto
 
 
 ```
-├── dependency-reduced-pom.xml
+├── card-game-1.0-SNAPSHOT.jar
 ├── docs
-│   ├── diagramas
-│   │   └── diagrama_classes (substitua).png
-│   └── manual
-│       └── regras-jogo.md
+│   └── manual.md
 ├── .gitignore
 ├── .mvn
 │   └── wrapper
@@ -88,44 +101,68 @@ Utiliza o ecossistema Maven para gerenciamento de dependências e Jackson para p
         │   │           └── ScreenManager.java
         │   └── module-info.java
         └── resources
-            └── com
-                └── cardgame
-                    ├── audio
-                    │   ├── fundo_menu.wav
-                    │   └── som_select.wav
-                    ├── css
-                    │   ├── estilo_adversario.css
-                    │   ├── estilo_batalha.css
-                    │   ├── estilo_deck.css
-                    │   └── estilo_menu.css
-                    ├── dados
-                    │   ├── bots.json
-                    │   └── cartas.json
-                    ├── fxml
-                    │   ├── estilo_menu.fxml
-                    │   ├── janela_batalha.fxml
-                    │   ├── menu_carregar_save.fxml
-                    │   ├── menu_principal.fxml
-                    │   ├── nickname.fxml
-                    │   ├── selecao_adversario.fxml
-                    │   └── selecao_deck.fxml
-                    └── img
-                        ├── cartas
-                        │   ├── carta01.png
-                        │   ├── carta02.png
-                        │   └── ...
-                        ├── fundos
-                        │   └── fundo_menu.jpg
-                        ├── inimigos
-                        │   ├── inimigo01.png
-                        │   ├── inimigo02.png
-                        │   └── ...
-                        └── Logo.png
+            ├── com
+            │   └── cardgame
+            │       ├── audio
+            │       │   ├── fundo_menu.wav
+            │       │   └── som_select.wav
+            │       ├── css
+            │       │   ├── estilo_adversario.css
+            │       │   ├── estilo_batalha.css
+            │       │   ├── estilo_deck.css
+            │       │   └── estilo_menu.css
+            │       ├── dados
+            │       │   ├── bots.json
+            │       │   └── cartas.json
+            │       ├── fxml
+            │       │   ├── estilo_menu.fxml
+            │       │   ├── janela_batalha.fxml
+            │       │   ├── menu_carregar_save.fxml
+            │       │   ├── menu_principal.fxml
+            │       │   ├── nickname.fxml
+            │       │   ├── selecao_adversario.fxml
+            │       │   └── selecao_deck.fxml
+            │       └── img
+            │           ├── cartas
+            │           │   ├── carta01.png
+            │           │   └── ...png
+            │           ├── fundos
+            │           │   └── fundo_menu.jpg
+            │           ├── inimigos
+            │           │   ├── inimigo01.png
+            │           │   └── ...png
+            │           └── Logo.png
+
 ```
 
 ---
 
-## 🤝 Colaboradores
+## 📦 Instalando Prompt Cards
+
+Abra o terminal/prompt de comando em qualquer lugar e clone o repositório
+
+```
+git clone https://github.com/WashiiApp/Washii.git
+```
+
+Para abrir a pasta:
+
+```
+cd Prompt-Cards
+```
+
+
+## 👾 Como jogar
+
+```
+java -jar card-game-1.0-SNAPSHOT.jar
+```
+
+Se divirta!
+
+---
+
+## 👥 Colaboradores
 
 - **Gabriel Melo**
 - **Marcos William**
