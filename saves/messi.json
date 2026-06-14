@@ -1,8 +1,0 @@
-{
-  "nickname" : "Messi",
-  "deckIdSelecionado" : "DECK_2",
-  "cartasDoDeckSelecionado" : [ "13", "16", "4", "10", "2" ],
-  "botsDerrotados" : [ "BOT_ERICK" ],
-  "cartasGanhas" : [ ],
-  "ultimoBotEnfrentado" : "BOT_LEON"
-}

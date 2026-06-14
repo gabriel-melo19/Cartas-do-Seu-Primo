@@ -1,8 +1,0 @@
-{
-  "nickname" : "Caça rato",
-  "deckIdSelecionado" : null,
-  "cartasDoDeckSelecionado" : [ ],
-  "botsDerrotados" : [ "BOT_ERICK" ],
-  "cartasGanhas" : [ ],
-  "ultimoBotEnfrentado" : "BOT_ERICK"
-}
