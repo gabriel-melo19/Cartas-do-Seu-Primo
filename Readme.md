@@ -55,7 +55,7 @@ Utiliza o ecossistema Maven para gerenciamento de dependências e Jackson para p
 ├── mvnw.cmd
 ├── pom.xml
 ├── Readme.md
-├── saves
+├── saves (só ficará visível ao criar um novo save durante o jogo)
 └── src
     └── main
         ├── java
