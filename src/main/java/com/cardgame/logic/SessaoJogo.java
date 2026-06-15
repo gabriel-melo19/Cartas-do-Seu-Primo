@@ -22,10 +22,6 @@ public class SessaoJogo {
         SessaoJogo.nicknameAtual = nicknameAtual;
     }
 
-    public static boolean temNickname() {
-        return nicknameAtual != null && !nicknameAtual.isBlank();
-    }
-
     public static boolean isCarregandoDeSave() {
         return carregandoDeSave;
     }
@@ -42,13 +38,4 @@ public class SessaoJogo {
         SessaoJogo.adversarioAtual = adversarioAtual;
     }
 
-    public static boolean temAdversarioAtual() {
-        return adversarioAtual != null;
-    }
-
-    public static void limpar() {
-        nicknameAtual = null;
-        carregandoDeSave = false;
-        adversarioAtual = null;
-    }
 }

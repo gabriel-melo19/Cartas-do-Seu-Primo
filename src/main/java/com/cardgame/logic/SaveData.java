@@ -19,16 +19,12 @@ public class SaveData {
     @JsonProperty("botsDerrotados")
     private List<String> botsDerrotados;
 
-    @JsonProperty("cartasGanhas")
-    private List<String> cartasGanhas;
-
     @JsonProperty("ultimoBotEnfrentado")
     private String ultimoBotEnfrentado;
 
     public SaveData() {
         this.cartasDoDeckSelecionado = new ArrayList<>();
         this.botsDerrotados = new ArrayList<>();
-        this.cartasGanhas = new ArrayList<>();
         this.ultimoBotEnfrentado = "";
     }
 
@@ -37,7 +33,6 @@ public class SaveData {
         this.deckIdSelecionado = deckIdSelecionado;
         this.cartasDoDeckSelecionado = new ArrayList<>();
         this.botsDerrotados = new ArrayList<>();
-        this.cartasGanhas = new ArrayList<>();
         this.ultimoBotEnfrentado = "";
     }
 
@@ -71,22 +66,6 @@ public class SaveData {
         return botsDerrotados;
     }
 
-    public void setBotsDerrotados(List<String> botsDerrotados) {
-        this.botsDerrotados = botsDerrotados != null ? botsDerrotados : new ArrayList<>();
-    }
-
-    public List<String> getCartasGanhas() {
-        return cartasGanhas;
-    }
-
-    public void setCartasGanhas(List<String> cartasGanhas) {
-        this.cartasGanhas = cartasGanhas != null ? cartasGanhas : new ArrayList<>();
-    }
-
-    public String getUltimoBotEnfrentado() {
-        return ultimoBotEnfrentado;
-    }
-
     public void setUltimoBotEnfrentado(String ultimoBotEnfrentado) {
         this.ultimoBotEnfrentado = ultimoBotEnfrentado;
     }
@@ -101,15 +80,4 @@ public class SaveData {
         }
     }
 
-    public boolean botJaFoiDerrotado(String botId) {
-        return botId != null && botsDerrotados.contains(botId);
-    }
-
-    public void adicionarCartaGanha(String cartaId) {
-        if (cartaId == null || cartaId.isBlank()) {
-            return;
-        }
-
-        cartasGanhas.add(cartaId);
-    }
 }

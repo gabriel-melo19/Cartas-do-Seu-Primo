@@ -10,6 +10,5 @@ public class DueloResultado {
     public boolean vitoria;
     public String mensagem;
     public int valorDinheiro;
-    public List<Carta> cartasGanhas = new ArrayList<>();
     public boolean batalhouComSucesso;
 }

@@ -147,17 +147,7 @@ public abstract class Jogador {
     public boolean perdeuTudo() {
         return mao.isEmpty() && !temCartaNoTabuleiro();
     }
-
-    /**
-     * Adiciona uma carta ganha como prêmio à coleção do jogador.
-     *
-     * @param cartaPremio Carta a ser adicionada.
-     */
-    public void adicionarCartaPremio(Carta cartaPremio) {
-        if (cartaPremio != null && !colecao.contains(cartaPremio)) {
-            colecao.add(cartaPremio);
-        }
-    }
+    
 
     public String getId() { return id; }
     public String getNome() { return nome; }

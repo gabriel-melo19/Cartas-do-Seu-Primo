@@ -4,8 +4,6 @@ import com.cardgame.model.Bot;
 import com.cardgame.model.Carta;
 import com.cardgame.model.JogadorHumano;
 
-import java.util.List;
-
 /**
  * Orquestra o fluxo de batalha entre Humano e Bot.
  * Regras:
