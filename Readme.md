@@ -139,7 +139,7 @@ Utiliza o ecossistema Maven para gerenciamento de dependências e Jackson para p
 
 ## 📦 Instalando Prompt Cards
 
-Certifique-se de que esteja usando Java 21 ou superior!
+Certifique-se de que tenha baixado o **OpenJDK** Java 21 ou superior, pois ele já vem com suporte ao JavaFX!
 
 Abra o terminal/prompt de comando em qualquer lugar e cole o comando abaixo:
 
